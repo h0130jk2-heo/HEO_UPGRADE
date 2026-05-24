@@ -33,7 +33,7 @@
       "id": "F005",
       "name": "Architecture-sketch skill",
       "priority": "Must",
-      "passes": false,
+      "passes": true,
       "description": "Pre-init-project skill; surfaces tech stack, folder layout, alternatives as ARCHITECTURE_PROPOSAL.md",
       "phase": "SHAPE",
       "skeleton_ref": "[2]"
