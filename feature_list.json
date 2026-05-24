@@ -42,7 +42,7 @@
       "id": "F006",
       "name": "Init-project enhancement",
       "priority": "Must",
-      "passes": false,
+      "passes": true,
       "description": "Consume ARCHITECTURE_PROPOSAL.md; install language packs into .claude/rules/<lang>.md",
       "phase": "SHAPE",
       "skeleton_ref": "[3]",
