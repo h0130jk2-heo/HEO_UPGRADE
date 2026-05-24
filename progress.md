@@ -10,10 +10,18 @@
 - [2026-05-25] F005 Architecture-sketch skill: pre-init-project tech stack/structure proposal, ARCHITECTURE_PROPOSAL.md output
 - [2026-05-25] F006 Init-project enhancement: ARCHITECTURE_PROPOSAL.md consumption, language packs (TS/JS + Python + PowerShell)
 
-## Session End — 2026-05-25
+## Session End — 2026-05-25 (session 1)
 <!-- 세션 종료 기록 -->
 - Mode: heo-active
 - Tier: Standard
 - Last feature: F005 (completed)
 - This session: dogfood setup (PRD.md + feature_list.json + git init → meta→heo-active), built F005 architecture-sketch skill, ran first heo-active feature-done
 - Next: F006 Init-project enhancement (consume ARCHITECTURE_PROPOSAL.md + language packs)
+
+## Session End — 2026-05-25 (session 2)
+<!-- 세션 종료 기록 -->
+- Mode: heo-active
+- Tier: Standard
+- Last feature: F006 (completed)
+- This session: built F006 init-project enhancement (ARCHITECTURE_PROPOSAL.md consumption logic + 3 language packs: TS/JS, Python, PowerShell)
+- Next: F007 Feature-plan skill (live per-feature plan)
