@@ -1,0 +1,141 @@
+{
+  "project": "HEO_UPGRADE",
+  "features": [
+    {
+      "id": "F001",
+      "name": "Checkpoint hook",
+      "priority": "Must",
+      "passes": true,
+      "description": "PostToolUse.sh counts Edit/Write/NotebookEdit every 5 in HEO_UPGRADE-active projects; session-start.sh resets counter"
+    },
+    {
+      "id": "F002",
+      "name": "Brainstorm skill",
+      "priority": "Must",
+      "passes": true,
+      "description": "Divergent → convergent ideation; outputs BRAINSTORM.md; prd-creator Step 0 consumption added"
+    },
+    {
+      "id": "F003",
+      "name": "Handoff skill v1.1",
+      "priority": "Must",
+      "passes": true,
+      "description": "5-phase session-end ceremony with 4 modes (heo-active/heo-general/meta/anomaly) and 3 tiers (Light/Standard/Advanced)"
+    },
+    {
+      "id": "F004",
+      "name": "Resume-heo skill",
+      "priority": "Must",
+      "passes": true,
+      "description": "Session-start mirror of handoff; 4-state classifier (mid-feature/between/stale/no-project)"
+    },
+    {
+      "id": "F005",
+      "name": "Architecture-sketch skill",
+      "priority": "Must",
+      "passes": false,
+      "description": "Pre-init-project skill; surfaces tech stack, folder layout, alternatives as ARCHITECTURE_PROPOSAL.md",
+      "phase": "SHAPE",
+      "skeleton_ref": "[2]"
+    },
+    {
+      "id": "F006",
+      "name": "Init-project enhancement",
+      "priority": "Must",
+      "passes": false,
+      "description": "Consume ARCHITECTURE_PROPOSAL.md; install language packs into .claude/rules/<lang>.md",
+      "phase": "SHAPE",
+      "skeleton_ref": "[3]",
+      "depends_on": ["F005"]
+    },
+    {
+      "id": "F007",
+      "name": "Feature-plan skill",
+      "priority": "Must",
+      "passes": false,
+      "description": "Live per-feature plan reading Architecture + lessons-learned + instincts + HANDOFF.md",
+      "phase": "BUILD",
+      "skeleton_ref": "[4]"
+    },
+    {
+      "id": "F008",
+      "name": "Verify-stack skill",
+      "priority": "Must",
+      "passes": false,
+      "description": "Multi-layer review: self-review + security (static+LLM) + cross-model (Gemini); tiered failure modes",
+      "phase": "BUILD",
+      "skeleton_ref": "[5]"
+    },
+    {
+      "id": "F009",
+      "name": "Feature-done enhancement",
+      "priority": "Must",
+      "passes": false,
+      "description": "Consume verify-report; visual check if UI; record successes (not just failures)",
+      "phase": "BUILD",
+      "skeleton_ref": "[6]",
+      "depends_on": ["F008"]
+    },
+    {
+      "id": "F010",
+      "name": "Reflect skill",
+      "priority": "Should",
+      "passes": false,
+      "description": "Periodic instinct extraction from failures AND successes; confidence-graded; user confirms before committing",
+      "phase": "EVOLVE",
+      "skeleton_ref": "[10]"
+    },
+    {
+      "id": "F011",
+      "name": "Project-doctor skill",
+      "priority": "Should",
+      "passes": false,
+      "description": "Health check: CLAUDE.md size, Architecture.md drift, feature_list.json drift, stale lessons, unused skills",
+      "phase": "EVOLVE",
+      "skeleton_ref": "[11]"
+    },
+    {
+      "id": "F012",
+      "name": "Confidence tagging",
+      "priority": "Should",
+      "passes": false,
+      "description": "Cross-cutting convention: [verified]/[high]/[medium]/[guess] tags on framework outputs",
+      "phase": "CROSS-CUTTING"
+    },
+    {
+      "id": "F013",
+      "name": "Cost awareness",
+      "priority": "Should",
+      "passes": false,
+      "description": "Cross-cutting: estimated context size, subagent multiplier, .claude/cost-log.jsonl",
+      "phase": "CROSS-CUTTING"
+    },
+    {
+      "id": "F014",
+      "name": "Pre-ship-check skill",
+      "priority": "Could",
+      "passes": false,
+      "description": "Verify all features pass, unresolved warnings, secrets check, README, deploy target",
+      "phase": "SHIP",
+      "skeleton_ref": "[7]"
+    },
+    {
+      "id": "F015",
+      "name": "Deploy skill",
+      "priority": "Could",
+      "passes": false,
+      "description": "Deployment command, git tag, rollback info in deploy-history.json",
+      "phase": "SHIP",
+      "skeleton_ref": "[8]"
+    },
+    {
+      "id": "F016",
+      "name": "Monitor skill",
+      "priority": "Could",
+      "passes": false,
+      "description": "Lightweight deployment reachability check; suggests rollback if broken",
+      "phase": "SHIP",
+      "skeleton_ref": "[9]"
+    }
+  ]
+}
