@@ -186,10 +186,32 @@
       "id": "F011",
       "name": "Project-doctor skill",
       "priority": "Should",
-      "passes": false,
+      "passes": true,
       "description": "Health check: CLAUDE.md size, Architecture.md drift, feature_list.json drift, stale lessons, unused skills",
       "phase": "EVOLVE",
-      "skeleton_ref": "[11]"
+      "skeleton_ref": "[11]",
+      "plan": {
+        "generated_at": "2026-05-25",
+        "context_sources": ["feature_list.json", "ADVANCED_SKELETON.md", "instincts.md"],
+        "files_to_touch": [
+          "~/.claude/skills/project-doctor/SKILL.md",
+          "feature_list.json"
+        ],
+        "steps": [
+          "Step 1: Create SKILL.md — 5 health checks + report format + user-selectable fix flow",
+          "Step 2: Self-apply (dogfood) — run project-doctor on current HEO_UPGRADE project",
+          "Step 3: QA — verify file structure, check behavior, update feature_list.json"
+        ],
+        "risks": [
+          "Architecture.md absent in some projects — graceful skip required"
+        ],
+        "verification": [
+          "SKILL.md exists with valid frontmatter",
+          "Self-apply produces actual health report",
+          "Missing files handled as N/A, not errors"
+        ],
+        "complexity": "S"
+      }
     },
     {
       "id": "F012",
