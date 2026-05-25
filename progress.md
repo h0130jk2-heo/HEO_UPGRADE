@@ -80,3 +80,11 @@
 - Last feature: F012 (completed)
 - This session: built F012 confidence tagging (global rule file + 4 skill output template updates); chose hard enforcement over soft convention
 - Next: F013 Cost awareness (cross-cutting estimation + logging)
+
+## Session End — 2026-05-25 (session 9)
+<!-- 세션 종료 기록 -->
+- Mode: heo-active
+- Tier: Standard
+- Last feature: F013 (completed)
+- This session: built F013 cost awareness (global rule file + 3 skill SKILL.md updates); cross-cutting convention instinct upgraded to medium confidence
+- Next: F014 Pre-ship-check skill (Could priority, Phase 3 SHIP)
