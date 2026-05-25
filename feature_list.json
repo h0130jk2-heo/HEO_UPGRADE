@@ -287,10 +287,35 @@
       "id": "F014",
       "name": "Pre-ship-check skill",
       "priority": "Could",
-      "passes": false,
+      "passes": true,
       "description": "Verify all features pass, unresolved warnings, secrets check, README, deploy target",
       "phase": "SHIP",
-      "skeleton_ref": "[7]"
+      "skeleton_ref": "[7]",
+      "plan": {
+        "generated_at": "2026-05-25",
+        "context_sources": ["feature_list.json", "ADVANCED_SKELETON.md", "instincts.md", "project-doctor/SKILL.md"],
+        "files_to_touch": [
+          "~/.claude/skills/pre-ship-check/SKILL.md",
+          "feature_list.json"
+        ],
+        "steps": [
+          "Step 1: Create SKILL.md — frontmatter + 5 checks (all features pass / unresolved warnings / secrets / docs / deploy target) + report format + user-selectable fix flow",
+          "Step 2: Align structure with project-doctor pattern (silent check → Korean report → user picks fixes)",
+          "Step 3: Self-apply (dogfood) — run pre-ship-check on current HEO_UPGRADE project",
+          "Step 4: QA — file existence, frontmatter validity, 5 checks defined, confidence tags applied"
+        ],
+        "risks": [
+          "Framework project has no deploy target — deploy check must graceful-skip as N/A",
+          "Partial overlap with project-doctor feature-pass check — acceptable (different purpose)"
+        ],
+        "verification": [
+          "SKILL.md exists with valid frontmatter",
+          "5 check sections defined",
+          "Self-apply produces actual report",
+          "Confidence tags applied per F012 convention"
+        ],
+        "complexity": "S"
+      }
     },
     {
       "id": "F015",
