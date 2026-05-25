@@ -1,0 +1,1 @@
+[2026-05-25] F007 Chose auto-invoke over manual for feature-plan from resume-heo. Reason: reduces friction — user already confirmed the feature, no need for a second "plan it?" prompt.
