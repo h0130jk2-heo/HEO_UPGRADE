@@ -52,10 +52,35 @@
       "id": "F007",
       "name": "Feature-plan skill",
       "priority": "Must",
-      "passes": false,
+      "passes": true,
       "description": "Live per-feature plan reading Architecture + lessons-learned + instincts + HANDOFF.md",
       "phase": "BUILD",
-      "skeleton_ref": "[4]"
+      "skeleton_ref": "[4]",
+      "plan": {
+        "generated_at": "2026-05-25",
+        "context_sources": ["feature_list.json", "ADVANCED_SKELETON.md", "instincts.md", "lessons-learned.md", "HANDOFF.md"],
+        "files_to_touch": [
+          "~/.claude/skills/feature-plan/SKILL.md",
+          "~/.claude/skills/resume-heo/SKILL.md",
+          "feature_list.json"
+        ],
+        "steps": [
+          "Step 1: Create SKILL.md — 6-step flow (Read context → Analyze → Present plan → Confirm → Save to feature_list.json → Begin implementation)",
+          "Step 2: Update resume-heo — auto-invoke feature-plan after user confirms feature in State A/B, update Hard Rules",
+          "Step 3: Self-apply — save F007 plan field to feature_list.json as dogfood validation",
+          "Step 4: QA — verify file structure, line count ≤ 200, quality checks, resume-heo integration"
+        ],
+        "risks": [
+          "instincts: 설계 리뷰만으로는 edge case 못 찾음 — self-apply(Step 3)로 대응"
+        ],
+        "verification": [
+          "SKILL.md exists with valid frontmatter",
+          "resume-heo SKILL.md references auto-invoke feature-plan",
+          "feature_list.json has plan field for F007",
+          "SKILL.md line count ≤ 200"
+        ],
+        "complexity": "S"
+      }
     },
     {
       "id": "F008",

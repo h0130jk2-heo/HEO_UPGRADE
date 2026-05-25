@@ -9,6 +9,7 @@
 - [2026-05-25] F004 Resume-heo skill: 4-state session-start router (pre-dogfood)
 - [2026-05-25] F005 Architecture-sketch skill: pre-init-project tech stack/structure proposal, ARCHITECTURE_PROPOSAL.md output
 - [2026-05-25] F006 Init-project enhancement: ARCHITECTURE_PROPOSAL.md consumption, language packs (TS/JS + Python + PowerShell)
+- [2026-05-25] F007 Feature-plan skill: live per-feature plan from current architecture + lessons-learned + instincts; auto-invoked by resume-heo
 
 ## Session End — 2026-05-25 (session 1)
 <!-- 세션 종료 기록 -->
