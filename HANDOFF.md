@@ -8,46 +8,42 @@
 
 ## Where We Stopped
 <!-- 어디서 멈췄나 -->
-- **Feature**: F007 — Feature-plan skill (next up, not started)
-- **Status**: between-features (F006 completed, F007 queued)
-- **Last action**: feature-done for F006 (QA passed, committed)
+- **Feature**: F008 — Verify-stack skill (next up, not started)
+- **Status**: between-features (F007 completed, F008 queued)
+- **Last action**: feature-done for F007 (QA passed, committed)
 
 ## What's Done This Session
 <!-- 이번 세션에서 한 일 -->
 
-### F006 Init-project enhancement
-- ✓ Added ARCHITECTURE_PROPOSAL.md consumption logic to `init-project/SKILL.md`
-  - Step 1b: reads and extracts Recommended Stack, Project Structure, Data Flow, Technical Decisions
-  - Step 2: Tech Stack section now uses architecture data (6 concrete fields: Runtime/Framework/Language/Styling/Data/Deployment)
-  - Step 3.5: Folder Layout and Data Flow sourced from architecture proposal
-  - Step 8a: deletes ARCHITECTURE_PROPOSAL.md after consuming (content lives in CLAUDE.md + Architecture.md)
-- ✓ Designed and built language pack system (Step 6):
-  - Detection logic: ARCHITECTURE_PROPOSAL.md → PRD → user prompt
-  - 3 packs created in `~/.claude/skills/init-project/packs/`:
-    - `typescript.md` (29 lines) — strict TS, ESM, patterns, pitfalls, deps
-    - `python.md` (30 lines) — type hints, dataclass, EAFP, pitfalls
-    - `powershell.md` (31 lines) — Verb-Noun, COM cleanup, pipeline, comparison ops
-  - Multi-language support: installs all matching packs
-  - Collision handling: won't overwrite existing rules without asking
-- ✓ Updated frontmatter description to mention new capabilities
-- ✓ QA passed (6/6 checks), committed as `feat: F006`
+### F007 Feature-plan skill
+- ✓ Created `~/.claude/skills/feature-plan/SKILL.md` (144 lines)
+  - 6-step flow: Read context → Analyze → Present plan → Confirm → Save → Implement
+  - Reads: feature_list.json, Architecture.md, lessons-learned.md, instincts.md, HANDOFF.md, recent git log
+  - Outputs: `plan` field in feature_list.json (files_to_touch, steps, risks, verification, complexity)
+  - Presented plan in Korean, waits for user confirmation before implementation
+- ✓ Updated resume-heo for auto-invoke:
+  - State A (mid-feature): auto-invokes feature-plan after user confirms continuation
+  - State B (between-features): auto-invokes feature-plan after user confirms next feature
+  - Hard Rule updated: feature-plan auto-invoke allowed after user confirmation
+- ✓ Self-applied (dogfood): F007's own plan saved to feature_list.json as validation
+- ✓ QA passed (4/4 checks), committed as `feat: F007`
 
-### Cumulative components (6 of 14 built)
+### Cumulative components (7 of 16 built)
 <!-- 누적 빌드 현황 -->
 - ✓ [0] checkpoint hook — PostToolUse.sh + session-start.sh
 - ✓ [1] brainstorm skill
 - ✓ [2] architecture-sketch skill
-- ✓ [3] init-project enhancement (NEW this session)
+- ✓ [3] init-project enhancement
+- ✓ [4] feature-plan skill (NEW this session)
 - ✓ [13] handoff skill v1.1
 - ✓ [14] resume-heo skill
 
 ## What's Left
-<!-- 남은 일 — 14 컴포넌트 중 8개 미빌드 + cross-cutting 2개 -->
+<!-- 남은 일 — 16 컴포넌트 중 9개 미빌드 -->
 
-### Phase 2 (BUILD) — 3 remaining
-- [ ] **F007 [4] feature-plan** — live per-feature plan reading Architecture + lessons-learned + instincts
-- [ ] **F008 [5] verify-stack** — self-review + security + cross-model (Gemini)
-- [ ] **F009 [6] feature-done enhancement** — verify-report + visual check + record successes
+### Phase 2 (BUILD) — 2 remaining
+- [ ] **F008 [5] verify-stack** — self-review + security (static+LLM) + cross-model (Gemini); tiered failure modes
+- [ ] **F009 [6] feature-done enhancement** — verify-report consumption + visual check + record successes
 
 ### Phase 4 (EVOLVE) — 2 remaining
 - [ ] **F010 [10] reflect** — periodic instinct extraction
@@ -64,34 +60,29 @@
 
 ## Decisions Made
 <!-- 이번 세션 결정 사항 -->
-- Chose **delete ARCHITECTURE_PROPOSAL.md** after consumption (over keeping for reference). Reason: core content migrates to CLAUDE.md + Architecture.md; keeping the original creates stale duplication.
-- Chose **all 3 language packs** (TS/JS + Python + PowerShell) for F006 scope. Reason: user uses all three; Rust/Go deferred as before.
+- Chose **auto-invoke** over manual for feature-plan from resume-heo. Reason: reduces friction — user already confirmed the feature, no need for a second "plan it?" prompt.
 
 ## Open Questions
-<!-- 이전 핸드오프에서 이월 + 해결된 것 표시 -->
-
-### Resolved this session
-- ~~#4 Language pack priority~~ → all 3 (TS/JS + Python + PowerShell)
-
-### Still open
+<!-- 이전 핸드오프에서 이월 -->
 1. **Reflect frequency** (Phase 4): every 5 features, every 10, or on demand only?
 2. **Cost awareness implementation**: hook? skill output? `/cost-estimate` skill?
 3. **Confidence tagging**: hard convention vs. soft?
 4. **handoff merge vs overwrite in meta mode**: less relevant now (heo-active), but spec question remains
-5. **Skill max-line policy**: init-project now 370 lines (orchestrator exception?). handoff 353, architecture-sketch 215.
+5. **Skill max-line policy**: feature-plan 144 lines (under 200). init-project 370 (orchestrator exception?). handoff 353.
 
 ## Verification Results
 <!-- Phase 2 (Standard tier) -->
-- `feature_list.json` — valid JSON ✓
-- Language packs — all 3 files exist with correct structure ✓
-- Field consistency — architecture-sketch output fields match init-project input fields ✓
+- `feature_list.json` — valid JSON, F007 has plan field ✓
+- `feature-plan/SKILL.md` — exists, valid frontmatter, 144 lines ✓
+- `resume-heo/SKILL.md` — auto-invoke references present (lines 99, 117) ✓
 - No verify-stack available yet (F008) — skipped deeper review
 
 ## Next Session — Start Here
 <!-- 다음 세션 첫 행동 -->
 1. **Read this HANDOFF.md** — `session-start.sh` will show summary
-2. **Start F007 — Feature-plan skill**:
-   - Design: live per-feature plan that reads Architecture.md + lessons-learned + instincts + recent commits
-   - Key output: `plan` field in feature_list.json (replaces static `steps[]`)
-   - Decide: should feature-plan be invoked automatically by resume-heo, or manually by user?
-3. **Optional**: resolve Open Question #1 (reflect frequency) if it affects F007 design
+2. **Start F008 — Verify-stack skill**:
+   - Design: 3 sub-layers (security hard-block, self-review confirm, cross-model warn)
+   - Key output: `.claude/verify-report-<feature-id>.md` (consumed by feature-done)
+   - Decide: Gemini CLI dependency — graceful degrade when not installed?
+   - Decide: static security rules — which rules to include for non-developer projects?
+3. **Optional**: resolve Open Question #1 (reflect frequency) if it affects F008 design

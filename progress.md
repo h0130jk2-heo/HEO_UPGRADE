@@ -26,3 +26,11 @@
 - Last feature: F006 (completed)
 - This session: built F006 init-project enhancement (ARCHITECTURE_PROPOSAL.md consumption logic + 3 language packs: TS/JS, Python, PowerShell)
 - Next: F007 Feature-plan skill (live per-feature plan)
+
+## Session End — 2026-05-25 (session 3)
+<!-- 세션 종료 기록 -->
+- Mode: heo-active
+- Tier: Standard
+- Last feature: F007 (completed)
+- This session: built F007 feature-plan skill (SKILL.md + resume-heo auto-invoke integration + plan field schema)
+- Next: F008 Verify-stack skill (multi-layer review)
