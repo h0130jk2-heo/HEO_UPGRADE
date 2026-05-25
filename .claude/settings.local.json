@@ -18,10 +18,14 @@
       "WebFetch(domain:docs.anthropic.com)",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(bash -n \"C:/Users/Heo/.claude/hooks/PostToolUse.sh\")",
+      "Bash(tasklist //FI \"PID eq 1172\")",
+      "Bash(powershell -Command \"Get-Process -Id 1172 -ErrorAction SilentlyContinue | Format-Table Id,ProcessName,Path\")",
+      "PowerShell(\\(Get-Content \"C:\\\\Users\\\\Heo\\\\.claude\\\\skills\\\\feature-plan\\\\SKILL.md\" | Measure-Object -Line\\).Lines)"
     ]
   },
   "remote": {
-    "defaultEnvironmentId": "env_012YzvqJB3uhjYPLogvao7j9"
+    "defaultEnvironmentId": "env_01HkCzPZkWk6vdrNMhTxa33e"
   }
 }

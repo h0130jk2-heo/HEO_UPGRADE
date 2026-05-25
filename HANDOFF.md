@@ -4,26 +4,32 @@
 
 ## Mode + Tier
 - **Mode**: heo-active (git + feature_list.json)
-- **Tier**: Standard (1 feature completed, 1 commit)
+- **Tier**: Advanced (4 feat commits this session)
 
 ## Where We Stopped
 <!-- 어디서 멈췄나 -->
-- **Feature**: F010 — Reflect skill (next up, not started)
-- **Status**: between-features (F009 completed, F010 queued)
-- **Last action**: feature-done for F009 (QA passed, committed)
+- **Feature**: F011 — Project-doctor skill (next up, not started)
+- **Status**: between-features (F010 completed, F011 queued)
+- **Last action**: feature-done for F010 (QA passed, committed)
 
 ## What's Done This Session
 <!-- 이번 세션에서 한 일 -->
 
-### F009 Feature-done enhancement
-- ✓ Added Step 1-B: verify-report consumption (FIX_REQUIRED → block, PROCEED → continue, missing → skip)
-- ✓ Enhanced Step 2 QA: UI/visual check for features mentioning UI/HTML/web (browser compare + graceful skip)
-- ✓ Added Step 5: success recording to `~/.claude/rules/instincts.md` (confidence: low, upgradeable by /reflect)
-- ✓ Line budget managed: 206→196 lines (compressed existing bullet lists into single paragraphs)
-- ✓ Self-applied (dogfood): ran feature-done on F009 itself, all new steps exercised
-- ✓ QA passed (6/6 checks), committed as `feat: F009`
+### F010 Reflect skill
+- ✓ Created `~/.claude/skills/reflect/SKILL.md` (134 lines, 4-step flow: Collect → Analyze → Confirm → Apply)
+- ✓ Confidence upgrade logic: low→medium (2+ observations), medium→high (3+)
+- ✓ Duplicate merge, cross-pollination, stale entry detection (90 days)
+- ✓ On-demand trigger + every-5th-feature suggestion (Open Question #1 resolved)
+- ✓ Self-applied (dogfood): ran reflect on 2 existing instincts entries, found 1 confidence upgrade candidate
+- ✓ User confirmed before any instincts.md modification (core safety check validated)
 
-### Cumulative components (9 of 16 built)
+### Skill line limit removal
+- ✓ User identified 200-line per-skill cap had no Karpathy basis (applies to CLAUDE.md only, not on-demand skill files)
+- ✓ Updated ADVANCED_SKELETON.md: removed "200-line per-skill cap enforced" from risks, updated success criteria
+- ✓ Updated instincts.md: clarified line budget entry scope to CLAUDE.md only
+- ✓ Added new instinct: trace constraint origins before enforcing them
+
+### Cumulative components (10 of 16 built)
 <!-- 누적 빌드 현황 -->
 - ✓ [0] checkpoint hook — PostToolUse.sh + session-start.sh
 - ✓ [1] brainstorm skill
@@ -31,15 +37,15 @@
 - ✓ [3] init-project enhancement
 - ✓ [4] feature-plan skill
 - ✓ [5] verify-stack skill
-- ✓ [6] feature-done enhancement (NEW this session)
+- ✓ [6] feature-done enhancement
+- ✓ [10] reflect skill (NEW this session)
 - ✓ [13] handoff skill v1.1
 - ✓ [14] resume-heo skill
 
 ## What's Left
-<!-- 남은 일 — 16 컴포넌트 중 7개 미빌드 -->
+<!-- 남은 일 — 16 컴포넌트 중 6개 미빌드 -->
 
-### Phase 4 (EVOLVE) — 2 remaining
-- [ ] **F010 [10] reflect** — periodic instinct extraction from failures AND successes
+### Phase 4 (EVOLVE) — 1 remaining
 - [ ] **F011 [11] project-doctor** — health check
 
 ### Cross-cutting — 2 remaining
@@ -53,28 +59,27 @@
 
 ## Decisions Made
 <!-- 이번 세션 결정 사항 -->
-- Chose single-paragraph compression over multi-bullet format for Step 1-B. Reason: line budget (200 max) required concise expression; single paragraph saved 5 lines without losing information.
+- Chose on-demand + every-5th-feature suggestion over fixed-interval reflect. Reason: non-developer user controls when to reflect; gentle nudge avoids overhead.
+- Removed 200-line per-skill cap. Reason: Karpathy's 200-line recommendation applies to CLAUDE.md (always loaded) not skill files (on-demand loaded).
 
 ## Open Questions
-<!-- 이전 핸드오프에서 이월 + 신규 -->
-1. **Reflect frequency** (Phase 4): every 5 features, every 10, or on demand only?
+<!-- 이전 핸드오프에서 이월 + 해소 현황 -->
+1. ~~**Reflect frequency** (Phase 4)~~ — RESOLVED: on-demand + every 5th feature suggestion
 2. **Cost awareness implementation**: hook? skill output? `/cost-estimate` skill?
 3. **Confidence tagging**: hard convention vs. soft?
-4. **Skill max-line policy**: verify-stack 197, feature-done 196. init-project 370 (orchestrator exception?). handoff 353.
+4. ~~**Skill max-line policy**~~ — RESOLVED: no hard cap for skills (on-demand load); CLAUDE.md keeps 200-line limit
 
 ## Verification Results
-<!-- Phase 2 (Standard tier) -->
-- `feature-done/SKILL.md` — 196 lines, 3 new sections present ✓
-- `feature_list.json` — valid JSON, F009 has plan field + passes: true ✓
-- instincts.md — success entry added (line budget pattern, confidence: low) ✓
-- Self-apply — feature-done ran on F009 itself: Step 1-B exercised (no report → skip), Step 5 exercised (instincts entry written) ✓
+<!-- Phase 2 (Advanced tier) -->
+- Only uncommitted change: `.claude/settings.local.json` (auto-config, not verify target)
+- reflect/SKILL.md — exists, valid frontmatter, 4-step flow present ✓
+- Self-apply — pattern analysis produced, user confirmation gate working ✓
+- instincts.md — 3 entries (1 updated scope, 1 new), format preserved ✓
 
 ## Next Session — Start Here
 <!-- 다음 세션 첫 행동 -->
 1. **Read this HANDOFF.md** — `session-start.sh` will show summary
-2. **Start F010 — Reflect skill**:
-   - Periodic instinct extraction from failures AND successes
-   - Confidence-graded entries (low → medium → high based on observation count)
-   - User confirms before committing instincts
-   - Resolve Open Question #1 (reflect frequency) as part of F010 design
-3. **Optional**: after F010, F011 (project-doctor) completes Phase 4 (EVOLVE)
+2. **Start F011 — Project-doctor skill**:
+   - Health check: CLAUDE.md size, Architecture.md drift, feature_list.json drift, stale lessons, unused skills
+   - Output: health report + suggested fixes (user picks which to apply)
+3. **After F011**: Phase 4 (EVOLVE) complete. Move to cross-cutting (F012 confidence tagging, F013 cost awareness)
