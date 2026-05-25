@@ -1,1 +1,3 @@
 [2026-05-25] F007 Chose auto-invoke over manual for feature-plan from resume-heo. Reason: reduces friction — user already confirmed the feature, no need for a second "plan it?" prompt.
+[2026-05-25] F008 Chose 6 universal static security patterns (secrets, SQLi, XSS, command injection, hardcoded creds, path traversal) over language-specific linting. Reason: non-developer projects span multiple languages; universal patterns avoid false-positive explosion.
+[2026-05-25] F008 Chose conditional cross-model trigger (diff>100 / confidence<70% / --strict) over always-on. Reason: cost awareness — Gemini CLI adds latency and token cost; small diffs don't benefit enough.
