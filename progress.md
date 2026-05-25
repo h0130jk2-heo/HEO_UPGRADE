@@ -13,6 +13,7 @@
 - [2026-05-25] F008 Verify-stack skill: 3-layer review (security hard-block + self-review confirm + cross-model warn); outputs verify-report for feature-done
 - [2026-05-25] F009 Feature-done enhancement: verify-report consumption + UI visual check + success recording to instincts.md
 - [2026-05-25] F010 Reflect skill: on-demand instinct extraction with confidence grading, duplicate merge, stale detection; user confirms before committing
+- [2026-05-25] F011 Project-doctor skill: 5-check health report (CLAUDE.md size, Architecture.md drift, feature_list.json drift, stale lessons, unused skills) + user-selectable fix flow; self-applied and found PRD drift
 
 ## Session End — 2026-05-25 (session 1)
 <!-- 세션 종료 기록 -->
