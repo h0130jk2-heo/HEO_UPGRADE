@@ -377,7 +377,7 @@ English body + Korean `<!-- 한글 -->` comments. Already established convention
 | Surface too large for non-dev to track | Medium | High | Auto-invoke per phase; user only triggers entry points |
 | Token cost explosion (especially cross-model + checkpoints) | Medium | Medium | Cross-cutting cost awareness layer; checkpoints skippable; cross-model conditional |
 | False confidence from multiple verify layers ("everything passed → ship it") | Medium | High | Confidence tags expose uncertainty; verify-stack reports must be specific not generic |
-| Skill bloat over time | Low | Medium | project-doctor checks for unused skills; 200-line per-skill cap enforced |
+| Skill bloat over time | Low | Medium | project-doctor checks for unused skills; keep skills concise but no hard line cap (skills load on-demand, unlike CLAUDE.md) |
 | Visual verification limited by Claude Code's tooling | High | Low | Use what's available (Read images, browser MCP if installed); graceful degrade |
 | Cross-model dependency (Gemini CLI) fragility | Medium | Low | Graceful degrade when not installed; not a hard requirement |
 | User overwhelm by Phase 1 length (4 skills before first code) | Medium | Medium | Smart-skip in brainstorm; architecture-sketch can be expressed in 30 lines for simple projects |
@@ -443,6 +443,6 @@ After ~10 features built with this skeleton, the framework is working if:
 - **User confidence**: User reports they trust commits they made via this flow more than commits made before
 - **Learning**: `instincts.md` has at least 5 entries, all confirmed useful by user
 - **Cost**: Token cost per feature is within 1.5× of feature-done-only baseline
-- **Surface stability**: Total skills still ≤ 12; no skill exceeds 200 lines
+- **Surface stability**: Total skills still ≤ 14; skills stay concise (no hard line cap — on-demand load, not always-on like CLAUDE.md)
 - **Bilingual integrity**: All artifacts maintain English body + Korean comments
 - **Resilience**: At least 1 feature where verify-stack caught a bug Claude would have committed otherwise

@@ -154,10 +154,33 @@
       "id": "F010",
       "name": "Reflect skill",
       "priority": "Should",
-      "passes": false,
+      "passes": true,
       "description": "Periodic instinct extraction from failures AND successes; confidence-graded; user confirms before committing",
       "phase": "EVOLVE",
-      "skeleton_ref": "[10]"
+      "skeleton_ref": "[10]",
+      "plan": {
+        "generated_at": "2026-05-25",
+        "context_sources": ["feature_list.json", "ADVANCED_SKELETON.md", "instincts.md", "lessons-learned.md", "feature-done/SKILL.md", "HANDOFF.md"],
+        "files_to_touch": [
+          "~/.claude/skills/reflect/SKILL.md"
+        ],
+        "steps": [
+          "Step 1: Create SKILL.md — trigger definition + 3-phase flow (Collect → Analyze → Confirm)",
+          "Step 2: Collect logic — gather from instincts.md (low entries), lessons-learned.md, recent commits/progress.md",
+          "Step 3: Pattern analysis + confidence upgrade — 2+ observations → low→medium, 3+ → medium→high; merge duplicates",
+          "Step 4: User confirmation UI — present extracted patterns in Korean, user approves/edits/rejects each",
+          "Step 5: Self-apply (dogfood) — run reflect on current 2 instincts entries to validate"
+        ],
+        "risks": [
+          "instincts: design review alone misses edge cases → self-apply in Step 5"
+        ],
+        "verification": [
+          "SKILL.md exists with valid frontmatter",
+          "Self-apply produces pattern analysis from current instincts.md",
+          "No instincts.md modification without user confirmation"
+        ],
+        "complexity": "S"
+      }
     },
     {
       "id": "F011",
