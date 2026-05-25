@@ -252,9 +252,36 @@
       "id": "F013",
       "name": "Cost awareness",
       "priority": "Should",
-      "passes": false,
+      "passes": true,
       "description": "Cross-cutting: estimated context size, subagent multiplier, .claude/cost-log.jsonl",
-      "phase": "CROSS-CUTTING"
+      "phase": "CROSS-CUTTING",
+      "plan": {
+        "generated_at": "2026-05-25",
+        "context_sources": ["feature_list.json", "ADVANCED_SKELETON.md", "instincts.md"],
+        "files_to_touch": [
+          "~/.claude/rules/cost-awareness.md",
+          "~/.claude/skills/verify-stack/SKILL.md",
+          "~/.claude/skills/architecture-sketch/SKILL.md",
+          "~/.claude/skills/reflect/SKILL.md"
+        ],
+        "steps": [
+          "Step 1: Create ~/.claude/rules/cost-awareness.md — cost estimation convention + cost-log.jsonl format",
+          "Step 2: Update verify-stack/SKILL.md — cost warning before Layer 3 cross-model",
+          "Step 3: Update architecture-sketch/SKILL.md — cost note for alternatives analysis",
+          "Step 4: Update reflect/SKILL.md — cost note for history scanning",
+          "Step 5: Self-apply (dogfood) — verify cost notes appear in session"
+        ],
+        "risks": [
+          "Token estimation is inherently approximate — use relative sizes (small/medium/large)",
+          "Too many cost warnings cause user fatigue — apply only to expensive skills"
+        ],
+        "verification": [
+          "cost-awareness.md exists with cost-log format definition",
+          "3 skill SKILL.md files have cost-related sections",
+          "Self-apply demonstrates actual cost note output"
+        ],
+        "complexity": "S"
+      }
     },
     {
       "id": "F014",
