@@ -121,11 +121,34 @@
       "id": "F009",
       "name": "Feature-done enhancement",
       "priority": "Must",
-      "passes": false,
+      "passes": true,
       "description": "Consume verify-report; visual check if UI; record successes (not just failures)",
       "phase": "BUILD",
       "skeleton_ref": "[6]",
-      "depends_on": ["F008"]
+      "depends_on": ["F008"],
+      "plan": {
+        "generated_at": "2026-05-25",
+        "context_sources": ["feature_list.json", "ADVANCED_SKELETON.md", "instincts.md", "verify-stack/SKILL.md", "feature-done/SKILL.md"],
+        "files_to_touch": [
+          "~/.claude/skills/feature-done/SKILL.md"
+        ],
+        "steps": [
+          "Step 1: Add Step 1-B — verify-report consumption between Step 1 and Step 2 (read report, gate on FIX_REQUIRED, delete after done)",
+          "Step 2: Add visual check conditional in Step 2 QA (browser check if UI feature, graceful skip)",
+          "Step 3: Add success recording in Step 2-A (append to instincts.md after QA passes)",
+          "Step 4: Self-apply (dogfood) — run feature-done on F009 itself to validate new logic"
+        ],
+        "risks": [
+          "Line budget tight: 184 + ~16 = 200 max. Must be concise."
+        ],
+        "verification": [
+          "SKILL.md ≤ 200 lines",
+          "3 new sections exist (verify-report, visual check, success recording)",
+          "verify-report consumption matches verify-stack output format",
+          "Self-apply validates actual behavior"
+        ],
+        "complexity": "S"
+      }
     },
     {
       "id": "F010",
