@@ -10,6 +10,7 @@
 - [2026-05-25] F005 Architecture-sketch skill: pre-init-project tech stack/structure proposal, ARCHITECTURE_PROPOSAL.md output
 - [2026-05-25] F006 Init-project enhancement: ARCHITECTURE_PROPOSAL.md consumption, language packs (TS/JS + Python + PowerShell)
 - [2026-05-25] F007 Feature-plan skill: live per-feature plan from current architecture + lessons-learned + instincts; auto-invoked by resume-heo
+- [2026-05-25] F008 Verify-stack skill: 3-layer review (security hard-block + self-review confirm + cross-model warn); outputs verify-report for feature-done
 
 ## Session End — 2026-05-25 (session 1)
 <!-- 세션 종료 기록 -->
