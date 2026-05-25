@@ -1,0 +1,6 @@
+# Claude Code Remote Control worktrees (auto-generated, transient)
+.claude/worktrees/
+
+# OS / editor
+Thumbs.db
+.DS_Store
