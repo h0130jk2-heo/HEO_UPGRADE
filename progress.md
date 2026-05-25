@@ -17,6 +17,7 @@
 - [2026-05-25] F012 Confidence tagging: cross-cutting convention with 4 tags ([verified]/[high]/[medium]/[guess]); global rule file + 4 skill SKILL.md updates (feature-plan, architecture-sketch, verify-stack, project-doctor)
 - [2026-05-25] F013 Cost awareness: cross-cutting cost estimation convention (small/medium/large) + cost-log.jsonl format; global rule file + 3 skill SKILL.md updates (verify-stack, architecture-sketch, reflect)
 - [2026-05-25] F014 Pre-ship-check skill: 5-check ship-readiness diagnostic (features pass / unresolved warnings / secrets / docs / deploy target); project-doctor pattern (silent check → Korean report → user picks fixes)
+- [2026-05-25] F015 Deploy skill: 4-phase deploy flow (pre-flight → execute → git tag → rollback registration); platform auto-detection + deploy-history.json schema + pre-ship-check integration
 
 ## Session End — 2026-05-25 (session 1)
 <!-- 세션 종료 기록 -->

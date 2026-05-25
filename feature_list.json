@@ -321,10 +321,37 @@
       "id": "F015",
       "name": "Deploy skill",
       "priority": "Could",
-      "passes": false,
+      "passes": true,
       "description": "Deployment command, git tag, rollback info in deploy-history.json",
       "phase": "SHIP",
-      "skeleton_ref": "[8]"
+      "skeleton_ref": "[8]",
+      "plan": {
+        "generated_at": "2026-05-25",
+        "context_sources": ["feature_list.json", "ADVANCED_SKELETON.md", "instincts.md", "pre-ship-check/SKILL.md"],
+        "files_to_touch": [
+          "~/.claude/skills/deploy/SKILL.md",
+          "feature_list.json"
+        ],
+        "steps": [
+          "Step 1: Create SKILL.md — frontmatter + 4-phase flow (pre-flight → deploy command → git tag → rollback registration) + platform detection logic",
+          "Step 2: Define deploy-history.json schema inside SKILL.md (deploy record + rollback command storage)",
+          "Step 3: Add pre-ship-check integration (suggest before deploy, warn on Not ready)",
+          "Step 4: Self-apply (structure validation only — project doesn't deploy) + QA"
+        ],
+        "risks": [
+          "Deploy is irreversible action — must require explicit user confirmation before execution",
+          "Platform detection may miss custom setups — fallback to user-provided command required",
+          "HEO_UPGRADE project cannot actually deploy — dogfood limited to structure validation"
+        ],
+        "verification": [
+          "SKILL.md exists with valid frontmatter",
+          "4-phase flow defined",
+          "deploy-history.json schema specified",
+          "pre-ship-check integration referenced",
+          "Confidence tags applied"
+        ],
+        "complexity": "S"
+      }
     },
     {
       "id": "F016",
