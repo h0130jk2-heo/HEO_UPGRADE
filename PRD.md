@@ -36,14 +36,14 @@ Authoritative spec: `ADVANCED_SKELETON.md`
 
 ### Should Have
 - [x] F010 — Reflect skill (periodic instinct extraction)
-- [ ] F011 — Project-doctor skill (health check)
-- [ ] F012 — Confidence tagging (cross-cutting convention + enforcement)
-- [ ] F013 — Cost awareness (cross-cutting estimation + logging)
+- [x] F011 — Project-doctor skill (health check)
+- [x] F012 — Confidence tagging (cross-cutting convention + enforcement)
+- [x] F013 — Cost awareness (cross-cutting estimation + logging)
 
 ### Could Have
-- [ ] F014 — Pre-ship-check skill
-- [ ] F015 — Deploy skill (with rollback)
-- [ ] F016 — Monitor skill
+- [x] F014 — Pre-ship-check skill
+- [x] F015 — Deploy skill (with rollback)
+- [x] F016 — Monitor skill
 
 ## 5. Success Criteria
 <!-- 성공 기준 -->
