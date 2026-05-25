@@ -8,41 +8,38 @@
 
 ## Where We Stopped
 <!-- 어디서 멈췄나 -->
-- **Feature**: F008 — Verify-stack skill (next up, not started)
-- **Status**: between-features (F007 completed, F008 queued)
-- **Last action**: feature-done for F007 (QA passed, committed)
+- **Feature**: F009 — Feature-done enhancement (next up, not started)
+- **Status**: between-features (F008 completed, F009 queued)
+- **Last action**: feature-done for F008 (QA passed, committed)
 
 ## What's Done This Session
 <!-- 이번 세션에서 한 일 -->
 
-### F007 Feature-plan skill
-- ✓ Created `~/.claude/skills/feature-plan/SKILL.md` (144 lines)
-  - 6-step flow: Read context → Analyze → Present plan → Confirm → Save → Implement
-  - Reads: feature_list.json, Architecture.md, lessons-learned.md, instincts.md, HANDOFF.md, recent git log
-  - Outputs: `plan` field in feature_list.json (files_to_touch, steps, risks, verification, complexity)
-  - Presented plan in Korean, waits for user confirmation before implementation
-- ✓ Updated resume-heo for auto-invoke:
-  - State A (mid-feature): auto-invokes feature-plan after user confirms continuation
-  - State B (between-features): auto-invokes feature-plan after user confirms next feature
-  - Hard Rule updated: feature-plan auto-invoke allowed after user confirmation
-- ✓ Self-applied (dogfood): F007's own plan saved to feature_list.json as validation
-- ✓ QA passed (4/4 checks), committed as `feat: F007`
+### F008 Verify-stack skill
+- ✓ Created `~/.claude/skills/verify-stack/SKILL.md` (197 lines)
+  - 3-layer flow: Security (hard block) → Self-review (confirm) → Cross-model (warn)
+  - Security: 6 universal static patterns (secrets, SQLi, XSS, command injection, hardcoded creds, path traversal) + LLM false-positive suppression
+  - Self-review: 5-item checklist + confidence score (0-100%)
+  - Cross-model: Gemini CLI conditional trigger (diff>100 / confidence<70% / --strict) + graceful degrade when not installed
+  - Output: `.claude/verify-report-<feature-id>.md` consumed by feature-done
+- ✓ Self-applied (dogfood): ran verify-stack on F008 itself, all layers passed (85% confidence)
+- ✓ QA passed (4/4 checks), committed as `feat: F008`
 
-### Cumulative components (7 of 16 built)
+### Cumulative components (8 of 16 built)
 <!-- 누적 빌드 현황 -->
 - ✓ [0] checkpoint hook — PostToolUse.sh + session-start.sh
 - ✓ [1] brainstorm skill
 - ✓ [2] architecture-sketch skill
 - ✓ [3] init-project enhancement
-- ✓ [4] feature-plan skill (NEW this session)
+- ✓ [4] feature-plan skill
+- ✓ [5] verify-stack skill (NEW this session)
 - ✓ [13] handoff skill v1.1
 - ✓ [14] resume-heo skill
 
 ## What's Left
-<!-- 남은 일 — 16 컴포넌트 중 9개 미빌드 -->
+<!-- 남은 일 — 16 컴포넌트 중 8개 미빌드 -->
 
-### Phase 2 (BUILD) — 2 remaining
-- [ ] **F008 [5] verify-stack** — self-review + security (static+LLM) + cross-model (Gemini); tiered failure modes
+### Phase 2 (BUILD) — 1 remaining
 - [ ] **F009 [6] feature-done enhancement** — verify-report consumption + visual check + record successes
 
 ### Phase 4 (EVOLVE) — 2 remaining
@@ -60,29 +57,30 @@
 
 ## Decisions Made
 <!-- 이번 세션 결정 사항 -->
-- Chose **auto-invoke** over manual for feature-plan from resume-heo. Reason: reduces friction — user already confirmed the feature, no need for a second "plan it?" prompt.
+- Chose 6 universal static security patterns over language-specific linting. Reason: non-developer projects span multiple languages; universal patterns avoid false-positive explosion.
+- Chose conditional cross-model trigger (diff>100 / confidence<70% / --strict) over always-on. Reason: cost awareness — Gemini CLI adds latency and token cost; small diffs don't benefit enough.
 
 ## Open Questions
-<!-- 이전 핸드오프에서 이월 -->
+<!-- 이전 핸드오프에서 이월 + 신규 -->
 1. **Reflect frequency** (Phase 4): every 5 features, every 10, or on demand only?
 2. **Cost awareness implementation**: hook? skill output? `/cost-estimate` skill?
 3. **Confidence tagging**: hard convention vs. soft?
 4. **handoff merge vs overwrite in meta mode**: less relevant now (heo-active), but spec question remains
-5. **Skill max-line policy**: feature-plan 144 lines (under 200). init-project 370 (orchestrator exception?). handoff 353.
+5. **Skill max-line policy**: verify-stack 197 lines (under 200). init-project 370 (orchestrator exception?). handoff 353.
 
 ## Verification Results
 <!-- Phase 2 (Standard tier) -->
-- `feature_list.json` — valid JSON, F007 has plan field ✓
-- `feature-plan/SKILL.md` — exists, valid frontmatter, 144 lines ✓
-- `resume-heo/SKILL.md` — auto-invoke references present (lines 99, 117) ✓
-- No verify-stack available yet (F008) — skipped deeper review
+- `verify-stack/SKILL.md` — exists, valid frontmatter, 197 lines ✓
+- `feature_list.json` — valid JSON, F008 has plan field + passes: true ✓
+- verify-report self-apply — generated and consumed successfully ✓
+- instincts.md — self-apply pattern upgraded to confidence: high (2 observations) ✓
 
 ## Next Session — Start Here
 <!-- 다음 세션 첫 행동 -->
 1. **Read this HANDOFF.md** — `session-start.sh` will show summary
-2. **Start F008 — Verify-stack skill**:
-   - Design: 3 sub-layers (security hard-block, self-review confirm, cross-model warn)
-   - Key output: `.claude/verify-report-<feature-id>.md` (consumed by feature-done)
-   - Decide: Gemini CLI dependency — graceful degrade when not installed?
-   - Decide: static security rules — which rules to include for non-developer projects?
-3. **Optional**: resolve Open Question #1 (reflect frequency) if it affects F008 design
+2. **Start F009 — Feature-done enhancement**:
+   - Consume `.claude/verify-report-<feature-id>.md` as QA evidence
+   - Add visual check for UI features (browser screenshot + PRD comparison)
+   - Record successes (not just failures) to feed `/reflect`
+   - Update feature-done SKILL.md (currently 184 lines — budget ~16 lines for additions)
+3. **Optional**: resolve Open Question #1 (reflect frequency) since F010 is next after F009
