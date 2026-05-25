@@ -86,10 +86,36 @@
       "id": "F008",
       "name": "Verify-stack skill",
       "priority": "Must",
-      "passes": false,
+      "passes": true,
       "description": "Multi-layer review: self-review + security (static+LLM) + cross-model (Gemini); tiered failure modes",
       "phase": "BUILD",
-      "skeleton_ref": "[5]"
+      "skeleton_ref": "[5]",
+      "plan": {
+        "generated_at": "2026-05-25",
+        "context_sources": ["feature_list.json", "ADVANCED_SKELETON.md", "instincts.md", "feature-done/SKILL.md", "HANDOFF.md"],
+        "files_to_touch": [
+          "~/.claude/skills/verify-stack/SKILL.md"
+        ],
+        "steps": [
+          "Step 1: Create SKILL.md — frontmatter + 3-layer flow (Security hard-block → Self-review confirm → Cross-model warn)",
+          "Step 2: Security layer — static rule patterns (secrets, SQLi, XSS, command injection, hardcoded creds, path traversal) + LLM false-positive suppression",
+          "Step 3: Cross-model layer — Gemini CLI detection, graceful skip when absent, conditional triggers (diff>100 / confidence<70% / --strict)",
+          "Step 4: verify-report output format — structured markdown consumed by feature-done",
+          "Step 5: Self-apply — run verify-stack on F008 itself for dogfood validation"
+        ],
+        "risks": [
+          "Gemini CLI not installed → cross-model layer must gracefully skip without breaking other layers",
+          "Static security rules too broad for non-dev projects → limit to 6 universal patterns, no language-specific linting",
+          "instincts: design review alone misses edge cases → self-apply in Step 5"
+        ],
+        "verification": [
+          "verify-stack/SKILL.md exists with valid frontmatter",
+          "SKILL.md ≤ 200 lines",
+          "verify-report format parseable by feature-done",
+          "Self-apply produces actual report file"
+        ],
+        "complexity": "M"
+      }
     },
     {
       "id": "F009",
