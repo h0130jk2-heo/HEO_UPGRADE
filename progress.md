@@ -91,3 +91,11 @@
 - Last feature: F013 (completed)
 - This session: built F013 cost awareness (global rule file + 3 skill SKILL.md updates); cross-cutting convention instinct upgraded to medium confidence
 - Next: F014 Pre-ship-check skill (Could priority, Phase 3 SHIP)
+
+## Session End — 2026-05-25 (session 10)
+<!-- 세션 종료 기록 -->
+- Mode: heo-active
+- Tier: Advanced (3 features completed)
+- Last feature: F016 (completed — final feature)
+- This session: built SHIP phase (F014 pre-ship-check + F015 deploy + F016 monitor); ran /project-doctor (PRD drift 6 items fixed); ran /reflect (2 upgrades, 1 merge)
+- Next: Framework complete (16/16). Ready for first real project dogfood.
