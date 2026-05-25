@@ -6,6 +6,8 @@
 
 A skill framework for non-developers building software with [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Four phases guide a project from fuzzy idea to deployed product, with quality gates the user doesn't need engineering expertise to operate.
 
+**[HTML Documentation](docs/index.html)** | **[GitHub Repository](https://github.com/h0130jk2-heo/HEO_UPGRADE)**
+
 ## Why This Exists
 
 <!-- 기존 5개 스킬(prd-creator, init-project, feature-done, optimize-claude-md, find-skills)만으로는
@@ -100,18 +102,44 @@ Claude Code can write code for you, but "code that works" and "code you can trus
 계속                  # at start (next session)
 ```
 
+## Installation
+
+<!-- 다른 컴퓨터에 설치하는 방법 -->
+
+Clone this repo, then run the install script to copy skills and rules into `~/.claude/`.
+
+**Windows (PowerShell):**
+```powershell
+.\install.ps1          # first install
+.\install.ps1 -Force   # overwrite existing
+```
+
+**macOS / Linux:**
+```bash
+bash install.sh          # first install
+bash install.sh --force  # overwrite existing
+```
+
+The scripts copy `framework/skills/` → `~/.claude/skills/` and `framework/rules/` → `~/.claude/rules/`. Existing files are skipped unless `-Force` / `--force` is used.
+
 ## File Structure
 
 <!-- 프로젝트 루트 파일 구조 -->
 
 ```
-E:\AI\100. Project\Basic\          # Framework meta-project (dogfood)
+HEO_UPGRADE/
 ├── ADVANCED_SKELETON.md           # Authoritative spec (4 phases, 16 features)
 ├── PRD.md                         # Product requirements
 ├── FRAMEWORK_DESIGN.md            # Initial design notes
 ├── feature_list.json              # Feature tracking (16/16 passes:true)
 ├── progress.md                    # Cumulative session log
 ├── HANDOFF.md                     # Last session handoff state
+├── install.ps1                    # Windows installer
+├── install.sh                     # macOS/Linux installer
+├── docs/index.html                # HTML documentation page
+├── framework/                     # Portable framework bundle
+│   ├── skills/                    # 15 skill definitions
+│   └── rules/                     # 4 cross-cutting rules
 └── .gitignore
 
 ~/.claude/
