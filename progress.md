@@ -71,3 +71,11 @@
 - Last feature: F011 (completed)
 - This session: built F011 project-doctor skill (5-check health report + user-selectable fixes); self-applied and discovered PRD↔JSON drift (6 items), fixed immediately
 - Next: F012 Confidence tagging (cross-cutting convention)
+
+## Session End — 2026-05-25 (session 8)
+<!-- 세션 종료 기록 -->
+- Mode: heo-active
+- Tier: Standard
+- Last feature: F012 (completed)
+- This session: built F012 confidence tagging (global rule file + 4 skill output template updates); chose hard enforcement over soft convention
+- Next: F013 Cost awareness (cross-cutting estimation + logging)

@@ -3,3 +3,4 @@
 [2026-05-25] F008 Chose conditional cross-model trigger (diff>100 / confidence<70% / --strict) over always-on. Reason: cost awareness — Gemini CLI adds latency and token cost; small diffs don't benefit enough.
 [2026-05-25] F010 Chose on-demand + every-5th-feature suggestion over fixed-interval reflect. Reason: non-developer user controls when to reflect; gentle nudge avoids overhead.
 [2026-05-25] F010 Removed 200-line per-skill cap. Reason: Karpathy's 200-line recommendation applies to CLAUDE.md (always loaded) not skill files (on-demand loaded). No external authority for skill line limits.
+[2026-05-25] F012 Chose hard enforcement (tag instructions in each skill's output template) over soft convention (docs-only). Reason: soft convention relies on Claude remembering to tag — hard enforcement places the instruction where output is generated.
