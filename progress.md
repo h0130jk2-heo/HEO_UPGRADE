@@ -44,3 +44,11 @@
 - Last feature: F008 (completed)
 - This session: built F008 verify-stack skill (3-layer: security hard-block + self-review confirm + cross-model warn; self-applied as dogfood)
 - Next: F009 Feature-done enhancement (verify-report consumption + visual check + success recording)
+
+## Session End — 2026-05-25 (session 5)
+<!-- 세션 종료 기록 -->
+- Mode: heo-active
+- Tier: Standard
+- Last feature: F009 (completed)
+- This session: enhanced feature-done skill with 3 additions (verify-report consumption, UI visual check, success recording to instincts.md); self-applied as dogfood
+- Next: F010 Reflect skill (periodic instinct extraction)

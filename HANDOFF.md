@@ -8,42 +8,38 @@
 
 ## Where We Stopped
 <!-- 어디서 멈췄나 -->
-- **Feature**: F009 — Feature-done enhancement (next up, not started)
-- **Status**: between-features (F008 completed, F009 queued)
-- **Last action**: feature-done for F008 (QA passed, committed)
+- **Feature**: F010 — Reflect skill (next up, not started)
+- **Status**: between-features (F009 completed, F010 queued)
+- **Last action**: feature-done for F009 (QA passed, committed)
 
 ## What's Done This Session
 <!-- 이번 세션에서 한 일 -->
 
-### F008 Verify-stack skill
-- ✓ Created `~/.claude/skills/verify-stack/SKILL.md` (197 lines)
-  - 3-layer flow: Security (hard block) → Self-review (confirm) → Cross-model (warn)
-  - Security: 6 universal static patterns (secrets, SQLi, XSS, command injection, hardcoded creds, path traversal) + LLM false-positive suppression
-  - Self-review: 5-item checklist + confidence score (0-100%)
-  - Cross-model: Gemini CLI conditional trigger (diff>100 / confidence<70% / --strict) + graceful degrade when not installed
-  - Output: `.claude/verify-report-<feature-id>.md` consumed by feature-done
-- ✓ Self-applied (dogfood): ran verify-stack on F008 itself, all layers passed (85% confidence)
-- ✓ QA passed (4/4 checks), committed as `feat: F008`
+### F009 Feature-done enhancement
+- ✓ Added Step 1-B: verify-report consumption (FIX_REQUIRED → block, PROCEED → continue, missing → skip)
+- ✓ Enhanced Step 2 QA: UI/visual check for features mentioning UI/HTML/web (browser compare + graceful skip)
+- ✓ Added Step 5: success recording to `~/.claude/rules/instincts.md` (confidence: low, upgradeable by /reflect)
+- ✓ Line budget managed: 206→196 lines (compressed existing bullet lists into single paragraphs)
+- ✓ Self-applied (dogfood): ran feature-done on F009 itself, all new steps exercised
+- ✓ QA passed (6/6 checks), committed as `feat: F009`
 
-### Cumulative components (8 of 16 built)
+### Cumulative components (9 of 16 built)
 <!-- 누적 빌드 현황 -->
 - ✓ [0] checkpoint hook — PostToolUse.sh + session-start.sh
 - ✓ [1] brainstorm skill
 - ✓ [2] architecture-sketch skill
 - ✓ [3] init-project enhancement
 - ✓ [4] feature-plan skill
-- ✓ [5] verify-stack skill (NEW this session)
+- ✓ [5] verify-stack skill
+- ✓ [6] feature-done enhancement (NEW this session)
 - ✓ [13] handoff skill v1.1
 - ✓ [14] resume-heo skill
 
 ## What's Left
-<!-- 남은 일 — 16 컴포넌트 중 8개 미빌드 -->
-
-### Phase 2 (BUILD) — 1 remaining
-- [ ] **F009 [6] feature-done enhancement** — verify-report consumption + visual check + record successes
+<!-- 남은 일 — 16 컴포넌트 중 7개 미빌드 -->
 
 ### Phase 4 (EVOLVE) — 2 remaining
-- [ ] **F010 [10] reflect** — periodic instinct extraction
+- [ ] **F010 [10] reflect** — periodic instinct extraction from failures AND successes
 - [ ] **F011 [11] project-doctor** — health check
 
 ### Cross-cutting — 2 remaining
@@ -57,30 +53,28 @@
 
 ## Decisions Made
 <!-- 이번 세션 결정 사항 -->
-- Chose 6 universal static security patterns over language-specific linting. Reason: non-developer projects span multiple languages; universal patterns avoid false-positive explosion.
-- Chose conditional cross-model trigger (diff>100 / confidence<70% / --strict) over always-on. Reason: cost awareness — Gemini CLI adds latency and token cost; small diffs don't benefit enough.
+- Chose single-paragraph compression over multi-bullet format for Step 1-B. Reason: line budget (200 max) required concise expression; single paragraph saved 5 lines without losing information.
 
 ## Open Questions
 <!-- 이전 핸드오프에서 이월 + 신규 -->
 1. **Reflect frequency** (Phase 4): every 5 features, every 10, or on demand only?
 2. **Cost awareness implementation**: hook? skill output? `/cost-estimate` skill?
 3. **Confidence tagging**: hard convention vs. soft?
-4. **handoff merge vs overwrite in meta mode**: less relevant now (heo-active), but spec question remains
-5. **Skill max-line policy**: verify-stack 197 lines (under 200). init-project 370 (orchestrator exception?). handoff 353.
+4. **Skill max-line policy**: verify-stack 197, feature-done 196. init-project 370 (orchestrator exception?). handoff 353.
 
 ## Verification Results
 <!-- Phase 2 (Standard tier) -->
-- `verify-stack/SKILL.md` — exists, valid frontmatter, 197 lines ✓
-- `feature_list.json` — valid JSON, F008 has plan field + passes: true ✓
-- verify-report self-apply — generated and consumed successfully ✓
-- instincts.md — self-apply pattern upgraded to confidence: high (2 observations) ✓
+- `feature-done/SKILL.md` — 196 lines, 3 new sections present ✓
+- `feature_list.json` — valid JSON, F009 has plan field + passes: true ✓
+- instincts.md — success entry added (line budget pattern, confidence: low) ✓
+- Self-apply — feature-done ran on F009 itself: Step 1-B exercised (no report → skip), Step 5 exercised (instincts entry written) ✓
 
 ## Next Session — Start Here
 <!-- 다음 세션 첫 행동 -->
 1. **Read this HANDOFF.md** — `session-start.sh` will show summary
-2. **Start F009 — Feature-done enhancement**:
-   - Consume `.claude/verify-report-<feature-id>.md` as QA evidence
-   - Add visual check for UI features (browser screenshot + PRD comparison)
-   - Record successes (not just failures) to feed `/reflect`
-   - Update feature-done SKILL.md (currently 184 lines — budget ~16 lines for additions)
-3. **Optional**: resolve Open Question #1 (reflect frequency) since F010 is next after F009
+2. **Start F010 — Reflect skill**:
+   - Periodic instinct extraction from failures AND successes
+   - Confidence-graded entries (low → medium → high based on observation count)
+   - User confirms before committing instincts
+   - Resolve Open Question #1 (reflect frequency) as part of F010 design
+3. **Optional**: after F010, F011 (project-doctor) completes Phase 4 (EVOLVE)
