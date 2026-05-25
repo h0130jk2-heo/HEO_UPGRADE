@@ -4,25 +4,39 @@
 
 ## Mode + Tier
 - **Mode**: heo-active (git + feature_list.json)
-- **Tier**: Standard (1 feat commit this session)
+- **Tier**: Advanced (3 feat commits this session)
 
 ## Where We Stopped
 <!-- 어디서 멈췄나 -->
-- **Feature**: F014 — Pre-ship-check skill (next up, not started)
-- **Status**: between-features (F013 completed, F014 queued)
-- **Last action**: feature-done for F013 (QA passed, committed)
+- **Feature**: ALL COMPLETE — 16/16 features passes: true
+- **Status**: framework-complete
+- **Last action**: /reflect (instinct upgrades) + /project-doctor (PRD sync)
 
 ## What's Done This Session
 <!-- 이번 세션에서 한 일 -->
 
-### F013 Cost awareness
-- ✓ Created `~/.claude/rules/cost-awareness.md` (global rule: cost estimation convention, small/medium/large sizing, cost-log.jsonl format)
-- ✓ Updated `~/.claude/skills/verify-stack/SKILL.md` — Cost Estimate section before Layer 3 + Cost Log section
-- ✓ Updated `~/.claude/skills/architecture-sketch/SKILL.md` — Cost Estimate section before Step 1
-- ✓ Updated `~/.claude/skills/reflect/SKILL.md` — Cost Estimate section before Preconditions
-- ✓ Cross-cutting convention instinct upgraded: low → medium (2nd observation: F012 + F013 same pattern)
+### F014 Pre-ship-check skill
+- ✓ Created `~/.claude/skills/pre-ship-check/SKILL.md` — 5-check ship-readiness diagnostic
+- ✓ Checks: all features pass / unresolved warnings / secrets / docs / deploy target
+- ✓ Self-applied on HEO_UPGRADE project (dogfood validated)
 
-### Cumulative components (13 of 16 built)
+### F015 Deploy skill
+- ✓ Created `~/.claude/skills/deploy/SKILL.md` — 4-phase deploy flow
+- ✓ Platform auto-detection (Vercel/Netlify/Docker/npm/Make/PyPI)
+- ✓ deploy-history.json schema with rollback registration
+- ✓ pre-ship-check integration (suggest before deploy)
+
+### F016 Monitor skill
+- ✓ Created `~/.claude/skills/monitor/SKILL.md` — 3-phase post-deploy health check
+- ✓ Reachability check (HTTP + platform-specific)
+- ✓ Rollback suggestion with double-confirm flow
+- ✓ deploy-history.json consumption for URL + rollback command
+
+### Maintenance
+- ✓ /project-doctor — PRD.md 6 checkboxes synced (F011-F016 → [x])
+- ✓ /reflect — 2 confidence upgrades (dogfood diagnostics low→high, diagnostic pattern reuse low→medium) + 1 merge (self-apply entries consolidated)
+
+### Cumulative components (16 of 16 built — COMPLETE)
 <!-- 누적 빌드 현황 -->
 - ✓ [0] checkpoint hook — PostToolUse.sh + session-start.sh
 - ✓ [1] brainstorm skill
@@ -31,42 +45,45 @@
 - ✓ [4] feature-plan skill
 - ✓ [5] verify-stack skill
 - ✓ [6] feature-done enhancement
+- ✓ [7] pre-ship-check skill (NEW this session)
+- ✓ [8] deploy skill (NEW this session)
+- ✓ [9] monitor skill (NEW this session)
 - ✓ [10] reflect skill
 - ✓ [11] project-doctor skill
 - ✓ [12] confidence tagging
-- ✓ [13] cost awareness (NEW this session)
+- ✓ [13] cost awareness
 - ✓ [14] handoff skill v1.1
 - ✓ [15] resume-heo skill
 
 ## What's Left
-<!-- 남은 일 — 16 컴포넌트 중 3개 미빌드 (전부 Could priority) -->
+<!-- 프레임워크 자체는 완성. 남은 건 실전 검증. -->
 
-### Phase 3 (SHIP) — 3 remaining (Could priority)
-- [ ] **F014 [7] pre-ship-check**
-- [ ] **F015 [8] deploy**
-- [ ] **F016 [9] monitor**
+### Framework complete — next steps are usage, not building
+- [ ] First real project end-to-end using the full framework
+- [ ] Verify success criteria from ADVANCED_SKELETON.md §12
+- [ ] Optional: README.md for the framework (if sharing)
 
 ## Decisions Made
 <!-- 이번 세션 결정 사항 -->
-- F013: Chose global rule file + skill template update approach (same pattern as F012). Reason: instincts confirmed this cross-cutting pattern works — global rule defines convention, skill templates enforce it at output point.
-- F013: Applied cost estimates only to "cost-notable" skills (verify-stack, architecture-sketch, reflect), not all skills. Reason: avoid user fatigue from excessive cost warnings on lightweight operations.
+- Built all 3 SHIP phase skills (F014-F016) in one session. Reason: data flow between them (deploy-history.json shared by deploy→monitor, pre-ship-check→deploy) made sequential build more consistent for integration.
+- Chose project-doctor pattern (silent check → report → user picks) for pre-ship-check. Reason: diagnostic skills should share UX pattern to minimize user learning cost.
+- Deploy skill designed as action skill (vs. diagnostic) with mandatory user confirmation. Reason: deploys are irreversible; safety > convenience.
 
 ## Open Questions
 <!-- 미해결 질문 -->
-1. **PRD.md drift**: F011, F012, F013 checkboxes still unchecked in PRD.md — run `/project-doctor` to fix
-2. **Phase 3 (SHIP) scope**: F014-F016 are all Could priority — user may choose to skip entirely if project doesn't deploy
+1. No CLAUDE.md in this meta-project — expected? (Framework builds skills in ~/.claude/, not in project root)
+2. No Architecture.md — acceptable for a skill framework, but could be useful for onboarding
 
 ## Verification Results
-<!-- Phase 2 (Standard tier) -->
-- F013 feat commit already verified via feature-done QA pipeline
-- cost-awareness.md exists with cost estimation convention + cost-log.jsonl format ✓
-- 3 skill SKILL.md files have Cost Estimate sections ✓
-- Lightweight skills correctly excluded from cost warnings ✓
+<!-- Phase 2 (Advanced tier) -->
+- F014, F015, F016 all passed feature-done QA pipeline
+- All 3 SKILL.md files have valid frontmatter + required sections
+- /project-doctor: all checks pass after PRD sync
+- /reflect: instincts.md updated (7 entries: 2 high, 2 medium, 3 low)
 
 ## Next Session — Start Here
 <!-- 다음 세션 첫 행동 -->
 1. **Read this HANDOFF.md** — `session-start.sh` will show summary
-2. **Decide on Phase 3 (SHIP)**:
-   - F014-F016 are Could priority — only needed if this framework project actually deploys
-   - If skipping SHIP: consider running `/project-doctor` to fix PRD drift, then `/reflect` for pattern review
-3. **If proceeding with SHIP**: Start F014 — Pre-ship-check skill
+2. **Framework is COMPLETE** — all 16/16 features built and passing
+3. **Next milestone: first real project** — pick an idea and run the full SHAPE→BUILD→SHIP flow
+4. **Optional cleanup**: add README.md, run `/optimize-claude-md` on future projects

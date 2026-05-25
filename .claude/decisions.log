@@ -4,3 +4,4 @@
 [2026-05-25] F010 Chose on-demand + every-5th-feature suggestion over fixed-interval reflect. Reason: non-developer user controls when to reflect; gentle nudge avoids overhead.
 [2026-05-25] F010 Removed 200-line per-skill cap. Reason: Karpathy's 200-line recommendation applies to CLAUDE.md (always loaded) not skill files (on-demand loaded). No external authority for skill line limits.
 [2026-05-25] F012 Chose hard enforcement (tag instructions in each skill's output template) over soft convention (docs-only). Reason: soft convention relies on Claude remembering to tag — hard enforcement places the instruction where output is generated.
+[2026-05-25] general Chose to build all 3 SHIP phase skills (F014-F016) in one session. Reason: data flow between them (deploy-history.json) made sequential build more consistent.
