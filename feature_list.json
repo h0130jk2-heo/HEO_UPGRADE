@@ -217,9 +217,36 @@
       "id": "F012",
       "name": "Confidence tagging",
       "priority": "Should",
-      "passes": false,
+      "passes": true,
       "description": "Cross-cutting convention: [verified]/[high]/[medium]/[guess] tags on framework outputs",
-      "phase": "CROSS-CUTTING"
+      "phase": "CROSS-CUTTING",
+      "plan": {
+        "generated_at": "2026-05-25",
+        "context_sources": ["feature_list.json", "ADVANCED_SKELETON.md", "instincts.md", "PRD.md"],
+        "files_to_touch": [
+          "~/.claude/rules/confidence-tags.md",
+          "~/.claude/skills/feature-plan/SKILL.md",
+          "~/.claude/skills/architecture-sketch/SKILL.md",
+          "~/.claude/skills/verify-stack/SKILL.md",
+          "~/.claude/skills/project-doctor/SKILL.md"
+        ],
+        "steps": [
+          "Step 1: Create ~/.claude/rules/confidence-tags.md — 4-tag definition, criteria, examples (global rule)",
+          "Step 2: Update 4 skill SKILL.md files — add tagging instructions to output templates",
+          "Step 3: Self-apply (dogfood) — verify tags appear in session outputs",
+          "Step 4: QA — file existence, tag consistency, non-destructive to existing skills"
+        ],
+        "risks": [
+          "Global rule file applies to all projects, not just HEO_UPGRADE — intended behavior since tags are universal convention"
+        ],
+        "verification": [
+          "confidence-tags.md exists with 4 tag definitions",
+          "4 skill SKILL.md files have tagging instructions",
+          "No conflict with existing instincts.md confidence format",
+          "Self-apply demonstrates actual tag usage"
+        ],
+        "complexity": "S"
+      }
     },
     {
       "id": "F013",
