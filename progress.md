@@ -62,3 +62,11 @@
 - Last feature: F010 (completed)
 - This session: built F010 reflect skill (4-step: collect → analyze → confirm → apply); removed unfounded 200-line skill cap (Karpathy only applies to CLAUDE.md); updated ADVANCED_SKELETON.md + instincts.md
 - Next: F011 Project-doctor skill (health check)
+
+## Session End — 2026-05-25 (session 7)
+<!-- 세션 종료 기록 -->
+- Mode: heo-active
+- Tier: Standard
+- Last feature: F011 (completed)
+- This session: built F011 project-doctor skill (5-check health report + user-selectable fixes); self-applied and discovered PRD↔JSON drift (6 items), fixed immediately
+- Next: F012 Confidence tagging (cross-cutting convention)
