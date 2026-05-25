@@ -11,6 +11,7 @@
 - [2026-05-25] F006 Init-project enhancement: ARCHITECTURE_PROPOSAL.md consumption, language packs (TS/JS + Python + PowerShell)
 - [2026-05-25] F007 Feature-plan skill: live per-feature plan from current architecture + lessons-learned + instincts; auto-invoked by resume-heo
 - [2026-05-25] F008 Verify-stack skill: 3-layer review (security hard-block + self-review confirm + cross-model warn); outputs verify-report for feature-done
+- [2026-05-25] F009 Feature-done enhancement: verify-report consumption + UI visual check + success recording to instincts.md
 
 ## Session End — 2026-05-25 (session 1)
 <!-- 세션 종료 기록 -->
