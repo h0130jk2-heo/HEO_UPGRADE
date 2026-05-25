@@ -357,10 +357,37 @@
       "id": "F016",
       "name": "Monitor skill",
       "priority": "Could",
-      "passes": false,
+      "passes": true,
       "description": "Lightweight deployment reachability check; suggests rollback if broken",
       "phase": "SHIP",
-      "skeleton_ref": "[9]"
+      "skeleton_ref": "[9]",
+      "plan": {
+        "generated_at": "2026-05-25",
+        "context_sources": ["feature_list.json", "ADVANCED_SKELETON.md", "instincts.md", "deploy/SKILL.md"],
+        "files_to_touch": [
+          "~/.claude/skills/monitor/SKILL.md",
+          "feature_list.json"
+        ],
+        "steps": [
+          "Step 1: Create SKILL.md — frontmatter + 3-phase flow (read deploy-history.json → reachability check → report + rollback suggestion)",
+          "Step 2: Deploy integration — consume deploy-history.json URL + rollback command; fallback to user-provided URL",
+          "Step 3: Rollback suggestion logic — on failure, show rollback command from deploy-history, require user confirmation",
+          "Step 4: Self-apply (structure validation only) + QA"
+        ],
+        "risks": [
+          "Network requests depend on external state — must handle timeout, DNS failure gracefully",
+          "Rollback is irreversible — require user confirmation before execution",
+          "HEO_UPGRADE has no deploy URL — dogfood limited to structure validation"
+        ],
+        "verification": [
+          "SKILL.md exists with valid frontmatter",
+          "3-phase flow defined",
+          "deploy-history.json consumption logic specified",
+          "Rollback suggestion + user confirmation flow included",
+          "Confidence tags applied"
+        ],
+        "complexity": "S"
+      }
     }
   ]
 }
