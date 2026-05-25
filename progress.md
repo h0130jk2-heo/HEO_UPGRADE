@@ -53,3 +53,11 @@
 - Last feature: F009 (completed)
 - This session: enhanced feature-done skill with 3 additions (verify-report consumption, UI visual check, success recording to instincts.md); self-applied as dogfood
 - Next: F010 Reflect skill (periodic instinct extraction)
+
+## Session End — 2026-05-25 (session 6)
+<!-- 세션 종료 기록 -->
+- Mode: heo-active
+- Tier: Advanced
+- Last feature: F010 (completed)
+- This session: built F010 reflect skill (4-step: collect → analyze → confirm → apply); removed unfounded 200-line skill cap (Karpathy only applies to CLAUDE.md); updated ADVANCED_SKELETON.md + instincts.md
+- Next: F011 Project-doctor skill (health check)
