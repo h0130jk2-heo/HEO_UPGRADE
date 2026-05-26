@@ -15,7 +15,7 @@ QA test → update records → git commit → suggest next feature.
 이 skill이 **기록/수정하는 모든 파일 산출물**(progress.md, docs/Architecture.md, CLAUDE.md의
 과거 실수 패턴 섹션, lessons-learned.md 등)은 **영어 본문 + 한글 주석** 형식을 유지한다.
 
-- Markdown: 본문 영어, 한글 설명은 `<!-- 한글 -->` HTML 주석
+- Markdown: 본문 영어. 한글 주석은 비자명한 맥락 설명에만 사용 (제목 번역 금지)
 - 기존 파일을 수정할 때도 해당 파일의 영문 스타일을 따라간다 (새 줄만 한국어로 추가하지 말 것)
 - 커밋 메시지는 한국어 유지 가능 (기존 프로젝트 컨벤션 존중)
 - 사용자와의 대화는 한국어

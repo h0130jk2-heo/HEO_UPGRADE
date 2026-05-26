@@ -16,8 +16,8 @@ The user should feel like they're approving a blueprint, not choosing from a tec
 
 ## ⚠️ Output Convention
 
-`ARCHITECTURE_PROPOSAL.md` follows the bilingual convention:
-- English body, Korean explanatory comments (`<!-- 한글 -->`)
+`ARCHITECTURE_PROPOSAL.md` convention:
+- English body. Korean comments only when they add non-obvious context (not heading translations).
 - Save to project root (alongside PRD.md)
 
 ## Preconditions
@@ -137,17 +137,14 @@ For each, pick the option that is: (a) most common (largest ecosystem), (b) simp
 After user confirms the recommendation (and any choices are resolved), save:
 
 ```markdown
-<!-- 아키텍처 제안서. init-project가 이 문서를 읽고 프로젝트를 스캐폴딩한다. -->
-<!-- 본문 영어, 한글은 HTML 주석. -->
+<!-- init-project가 이 문서를 소비하여 프로젝트를 스캐폴딩한다. -->
 
 # Architecture Proposal — [Project Name]
 
 ## Product Summary
-<!-- PRD에서 추출한 한 줄 요약 -->
 [One sentence from PRD]
 
 ## Recommended Stack
-<!-- 추천 기술 스택 -->
 - **Runtime**: [e.g., Node.js 20+]
 - **Framework**: [e.g., Next.js 14 (App Router)]
 - **Language**: [e.g., TypeScript]
@@ -156,23 +153,19 @@ After user confirms the recommendation (and any choices are resolved), save:
 - **Deployment target**: [e.g., Vercel / local only / Cloudflare Pages]
 
 ### Why this stack
-<!-- 이 스택을 추천하는 이유 (사용자 관점) -->
 [2-3 bullet points, user-facing language] [each with confidence tag]
 
 ## Project Structure
-<!-- 제안 폴더 구조 (아직 생성 안 됨) -->
 ```
 [folder tree with brief annotations]
 ```
 
 ## Data Flow
-<!-- 핵심 데이터 흐름 -->
 ```
 [ASCII diagram: input → processing → output/storage]
 ```
 
 ## Alternatives Considered
-<!-- 검토했으나 추천하지 않는 대안 -->
 
 ### [Alternative 1 name]
 - **Strengths**: [what's good about it]
@@ -183,18 +176,15 @@ After user confirms the recommendation (and any choices are resolved), save:
 - **Why not chosen**: [concrete reason] [confidence tag]
 
 ## Technical Decisions
-<!-- 엔지니어링 세부 결정 (사용자에게 질문 안 한 것들) -->
 | Decision | Choice | Reason |
 |---|---|---|
 | [e.g., Package manager] | [e.g., npm] | [e.g., Default, widest compatibility] |
 | [e.g., Test framework] | [e.g., Vitest] | [e.g., Fast, Vite-native] |
 
 ## Complexity Estimate
-<!-- 프로젝트 복잡도 추정 -->
 **[XS / S / M / L]** — [one sentence explanation of what this means for timeline and effort] [confidence tag]
 
 ## User Decisions Recorded
-<!-- 사용자가 직접 결정한 방향 선택 -->
 - [e.g., "웹앱으로 브라우저에서 접근" (over desktop app)]
 - [e.g., "로컬 SQLite" (over cloud DB)]
 ```

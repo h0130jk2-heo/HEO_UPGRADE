@@ -17,7 +17,7 @@ The goal is to make the user feel like they're talking to a thoughtful product m
 - **Keep it conversational.** Rephrase to match the user's vocabulary and context.
 - **Summarize periodically.** After every 2–3 questions, say: *"지금까지 정리한 내용이에요 —"* and recap what you've captured so far. Ask if anything needs adjusting.
 - **Respond in Korean.** Match the user's language. Ask follow-up questions in Korean.
-- **Save in English with Korean annotations.** The PRD.md main content must be in English, but every section must include Korean HTML comments (`<!-- ... -->`) providing translations and clarifying context for Korean readers.
+- **Save in English.** PRD.md body is English. Korean comments only when they add context not obvious from the English (e.g., explaining a domain-specific choice). Do NOT add comments that merely translate headings.
 - **Trigger save** when the user says "확정", "저장", "완료", "done", "save", or equivalent.
 
 ## PRD Sections (Required Coverage)
@@ -80,7 +80,7 @@ When the user confirms:
 3. Write to `PRD.md` in the current working directory
 4. Say: *"PRD.md에 저장했어요. 다음은 `/architecture-sketch`로 기술 스택과 프로젝트 구조를 잡아볼게요."*
 
-**Write in English, with Korean annotations.** The main content (headings, body text, feature descriptions, criteria) must be in English. Every section heading and placeholder hint must have a Korean HTML comment (`<!-- ... -->`) immediately below it, providing a translation and any clarifying context a Korean reviewer would find helpful. Follow the exact comment style used in `references/prd-template.md` as a guide.
+**Write in English.** Body text in English. Korean HTML comments only when they add non-obvious context (e.g., why a constraint exists, domain background). Do NOT add comments that merely translate headings.
 
 ## Quality Check Before Saving
 
