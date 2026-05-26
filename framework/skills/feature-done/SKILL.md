@@ -46,26 +46,39 @@ Check `.claude/verify-report-<feature-id>.md`: **FIX_REQUIRED** → stop and fix
 
 ---
 
+### Step 1-C: Run Automated Tests (TDD Gate)
+
+If the feature's `plan.test_spec.testable` is `true`:
+1. Run the test suite (`npm test`, `pytest`, `Invoke-Pester`, etc.)
+2. ALL tests must PASS. If any fail → STOP. Fix first, re-run, do NOT proceed.
+3. Output:
+```
+Automated Tests:
+✅ [test name] — passed
+❌ [test name] — FAILED: [reason]
+```
+
+If `test_spec.testable` is `false` or no `test_spec` exists → skip to Step 2.
+
+---
+
 ### Step 2: QA Testing (Strict)
 
-<!-- QA Agent 역할: 엄격한 테스터. "맞아 보인다"는 이유로 통과 금지 -->
-
-**Role:** Act as a strict QA tester. Verify each `step` by actually checking it — not by eyeballing the code and assuming it works.
+**Role:** Act as a strict QA tester. Verify each `step` by actually checking — not by eyeballing.
 
 Verification methods:
 - File existence → use Read / Glob directly
-- Logic correctness → read the code and trace the actual execution path
-- UI / visual features → if feature description or PRD mentions UI/HTML/web, open in browser and compare to PRD. Screenshot if browser tools available; graceful skip if not.
+- Logic correctness → read code, trace execution path
+- UI / visual → open in browser if applicable
 
-Output results clearly:
+Output results:
 ```
-Test Results:
+Manual QA:
 ✅ [step description] — passed
 ❌ [step description] — FAILED: [specific reason]
 ```
 
-<!-- ⚠️ 핵심 금지사항: 테스트 없이 passes: true 하는 것은 절대 금지 -->
-> **⚠️ WARNING:** Setting `passes: true` without running the tests defeats the entire purpose of this skill. Never do it.
+> **WARNING:** Setting `passes: true` without running tests (Step 1-C) AND manual QA (Step 2) is strictly forbidden.
 
 ---
 
