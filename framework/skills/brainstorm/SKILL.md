@@ -16,8 +16,8 @@ The goal is to make the user feel like they're talking to a thoughtful product c
 
 ## ⚠️ Output Convention
 
-`BRAINSTORM.md` follows the same bilingual convention as PRD.md:
-- English body, Korean explanatory comments (`<!-- 한글 -->`)
+`BRAINSTORM.md` convention:
+- English body. Korean comments only when they add non-obvious context (not heading translations).
 - Save to project root (alongside where PRD.md will go)
 
 ## Conversation Rules
@@ -64,41 +64,33 @@ Wait for the user's choice (or alternative). Never pick for them.
 
 ## Saving BRAINSTORM.md
 
-When the user confirms a direction, write to `BRAINSTORM.md` in the project root using this structure (English body, Korean comments):
+When the user confirms a direction, write to `BRAINSTORM.md` in the project root:
 
 ```markdown
-<!-- 아이디어 정리 결과. prd-creator가 이 문서를 읽고 PRD.md를 작성한다. -->
-<!-- 본문 영어, 한글은 HTML 주석. -->
+<!-- prd-creator가 이 문서를 읽고 PRD.md를 작성한다. -->
 
 # Brainstorm — [Project working title]
 
 ## Chosen Direction
-<!-- 선택된 방향 (한 문장) -->
 [One concrete sentence describing the picked direction]
 
 ## Why This Direction
-<!-- 왜 이 방향인가 — 사용자 답변에서 추출 -->
 [2–3 sentences synthesizing the user's reasoning from divergent answers]
 
 ## Problem
-<!-- 해결하려는 문제 -->
 [The problem the user wants to solve, concrete]
 
 ## Target User
-<!-- 대상 사용자 -->
 [Who will use it — named, not "users" or "people"]
 
 ## Minimum Viable Shape
-<!-- 가장 단순한 동작 버전 -->
 [One paragraph describing the simplest working version]
 
 ## Alternatives Considered
-<!-- 검토했으나 안 고른 방향 -->
 - **[Alternative 1 name]** — [brief description, why rejected]
 - **[Alternative 2 name]** — [brief description, why rejected]
 
 ## Open Questions for PRD
-<!-- prd-creator가 추가로 물어볼 것들 — brainstorm에서 완전히 다 답하지 못한 것 -->
 - [Question 1 left for PRD]
 - [Question 2 left for PRD]
 ```

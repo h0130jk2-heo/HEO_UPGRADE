@@ -23,7 +23,7 @@ The plan is saved to `feature_list.json` as a `plan` field on the target feature
 
 ## ⚠️ Output Convention
 
-All artifact outputs follow the bilingual convention: English body + Korean HTML comments (`<!-- 한글 -->`). User-facing conversation is in Korean.
+Artifact outputs in English. Korean HTML comments only when they add non-obvious context (not heading translations). User-facing conversation is in Korean.
 
 ## Preconditions
 
