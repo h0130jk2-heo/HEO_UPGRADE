@@ -48,25 +48,35 @@ Build the feature, verify it works, and commit. Never stop to ask for confirmati
 - Identify which files to create or modify
 - If a `decisions` field exists above, follow those choices exactly
 
-### Phase 2: Implement
-- Write clean, minimal code that satisfies each acceptance criterion
-- Follow the conventions in CLAUDE.md
-- Follow the architecture in Architecture.md
+### Phase 2: Write Tests First (TDD — if feature has testable logic)
+If the feature involves code logic (not just config/docs/skill files):
+- Write test files BEFORE production code, based on acceptance criteria
+- Tests should initially FAIL (red phase)
+- Use the project's test framework (Jest/Vitest/pytest/Pester)
+- Skip this phase for non-testable features (config, documentation, skill definitions)
+
+### Phase 3: Implement (make tests pass)
+- Write minimal code that makes all tests pass (green phase)
+- Follow conventions in CLAUDE.md and architecture in Architecture.md
 - Apply lessons-learned to avoid known mistakes
 - Apply instincts for proven good patterns
 
-### Phase 3: QA (strict — every step must pass)
-For each item in "Acceptance Criteria" above:
-- Verify it by actually checking (file exists? read it. Logic correct? trace it. Command works? run it.)
+### Phase 4: QA (strict — every step must pass)
+First, run automated tests:
+- Execute the test suite (npm test / pytest / etc.)
+- ALL tests must PASS before proceeding
+Then, for each item in "Acceptance Criteria" above:
+- Verify manually (file exists? read it. Logic correct? trace it.)
 - Output results:
 ```
-QA Results:
-✅ [step] — passed
-❌ [step] — FAILED: [reason]
+Automated Tests: [PASS/FAIL] ([N] tests)
+Manual QA:
+PASS [step] — passed
+FAIL [step] — FAILED: [reason]
 ```
 
-### Phase 4: Finalize
-If ALL steps pass:
+### Phase 5: Finalize
+If ALL tests pass AND all manual QA steps pass:
 1. Update `feature_list.json`: set `passes: true` for {{FEATURE_ID}}
 2. Append to `progress.md`: `- [{{TODAY}}] {{FEATURE_NAME}}: [one-line summary]`
 3. Update `docs/Architecture.md` if new files/folders were created

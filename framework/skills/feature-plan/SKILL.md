@@ -76,11 +76,19 @@ Also check: does the project have existing code? What patterns/conventions are e
 - Potential conflicts with recent commits or uncommitted changes
 - Complexity assessment (XS/S/M/L)
 
-### 2d. How to verify
-- Skill/file deliverable → file existence + content structure check
-- UI feature → browser check
-- Hook/automation → execution test
-- Integration → cross-feature check
+### 2d. Test strategy (TDD)
+Determine if this feature has testable logic:
+- **Testable** (logic, data processing, API, utilities): plan test cases from `steps[]`. Tests are written BEFORE implementation.
+- **Non-testable** (config files, documentation, UI-only, skill definitions): skip tests, rely on manual QA only.
+
+If testable, define:
+- Test file path (e.g., `src/__tests__/feature.test.ts`)
+- Test cases: one per acceptance criterion in `steps[]`
+- Test framework: match project's existing framework (Jest/Vitest/pytest/Pester)
+
+### 2e. How to verify
+- Testable features → run tests first, then manual QA
+- Non-testable features → manual verification only (file existence, structure, browser)
 
 ## Step 3: Present Plan
 
@@ -101,6 +109,10 @@ Present the plan in Korean, conversational style:
   2. [구체적 단계]
   3. [구체적 단계]
   [3-5단계, 최대 5]
+
+테스트 계획:
+  - [테스트 파일 경로] — [검증 케이스]
+  [비테스트 기능이면 "수동 검증만 (테스트 불필요)"]
 
 주의할 점:
   - [리스크 — 왜 위험한지 + 대응] [verified/high/medium/guess]
@@ -142,22 +154,15 @@ After confirmation, add the `plan` field to the target feature:
 "plan": {
   "generated_at": "YYYY-MM-DD",
   "context_sources": ["Architecture.md", "lessons-learned.md"],
-  "files_to_touch": [
-    "path/to/file1",
-    "path/to/file2"
-  ],
-  "steps": [
-    "Step 1: concrete action",
-    "Step 2: concrete action",
-    "Step 3: concrete action"
-  ],
-  "risks": [
-    "Risk description"
-  ],
-  "verification": [
-    "Check 1",
-    "Check 2"
-  ],
+  "files_to_touch": ["path/to/file1", "path/to/file2"],
+  "test_spec": {
+    "testable": true,
+    "test_files": ["src/__tests__/feature.test.ts"],
+    "cases": ["validates input X", "handles edge case Y"]
+  },
+  "steps": ["Step 1: write tests", "Step 2: implement", "Step 3: verify"],
+  "risks": ["Risk description"],
+  "verification": ["Run tests", "Manual check"],
   "complexity": "S"
 }
 ```
