@@ -61,11 +61,13 @@ triggers:
 - 병렬: 1 (순차, 안전) / 2-3 (빠름, git conflict 가능)
 
 **Step 4: 파이프라인 실행**
+Windows:
 ```powershell
-& "$env:USERPROFILE/.claude/tools/turbo-pipeline.ps1" `
-    -Project "<current-directory>" `
-    -Model <선택한모델> `
-    -Parallel <선택한수>
+& "$HOME/.claude/tools/turbo-pipeline.ps1" -Project "<cwd>" -Model <모델> -Parallel <수>
+```
+Linux/macOS:
+```bash
+~/.claude/tools/turbo-pipeline.sh --project "<cwd>" --model <모델> --parallel <수>
 ```
 
 **Step 5: 결과 리포트**
@@ -76,13 +78,23 @@ triggers:
 
 ## 세션 밖에서 직접 실행 (자러 가면서 걸어두기)
 
-PowerShell 터미널에서:
+**Windows (PowerShell):**
 ```powershell
-& "$env:USERPROFILE/.claude/tools/turbo-pipeline.ps1" `
+& "$HOME/.claude/tools/turbo-pipeline.ps1" `
     -Project "E:\my-project" `
     -Model sonnet `
     -Parallel 2
 ```
+
+**Linux / macOS (bash):**
+```bash
+~/.claude/tools/turbo-pipeline.sh \
+    --project /home/user/my-project \
+    --model sonnet \
+    --parallel 2
+```
+
+Linux에서는 `jq`가 필요합니다 (`sudo apt install jq` 또는 `brew install jq`).
 
 ## 동작 원리
 

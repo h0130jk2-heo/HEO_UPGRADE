@@ -111,7 +111,7 @@ Claude Code can write code for you, but "code that works" and "code you can trus
 
 <!-- 다른 컴퓨터에 설치하는 방법 -->
 
-Clone this repo, then run the install script to copy skills and rules into `~/.claude/`.
+Clone this repo, then run the install script to copy skills, rules, and tools into `~/.claude/`.
 
 **Windows (PowerShell):**
 ```powershell
@@ -123,6 +123,7 @@ Clone this repo, then run the install script to copy skills and rules into `~/.c
 ```bash
 bash install.sh          # first install
 bash install.sh --force  # overwrite existing
+# turbo-build requires jq: sudo apt install jq (or brew install jq)
 ```
 
 The scripts copy `framework/skills/` → `~/.claude/skills/` and `framework/rules/` → `~/.claude/rules/`. Existing files are skipped unless `-Force` / `--force` is used.

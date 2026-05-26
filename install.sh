@@ -67,6 +67,7 @@ if [ -d "$FRAMEWORK_DIR/tools" ]; then
             echo "  SKIP  $tool_name (already exists, use --force to overwrite)"
         else
             cp "$tool_file" "$dst"
+            chmod +x "$dst" 2>/dev/null || true
             echo "  OK    $tool_name"
             tools_installed=$((tools_installed + 1))
         fi
