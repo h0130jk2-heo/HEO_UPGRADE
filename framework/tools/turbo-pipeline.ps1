@@ -60,12 +60,12 @@ Write-Status "Loading project context from: $Project"
 
 $FeatureData = Get-FeatureList
 $ClaudeMd = Read-FileOrEmpty (Join-Path $Project "CLAUDE.md")
-$ArchMd = Read-FileOrEmpty (Join-Path $Project "docs\Architecture.md")
+$ArchMd = Read-FileOrEmpty (Join-Path $Project "docs" "Architecture.md")
 if ($ArchMd -eq "(not found)") {
     $ArchMd = Read-FileOrEmpty (Join-Path $Project "Architecture.md")
 }
-$LessonsLearned = Read-FileOrEmpty "$env:USERPROFILE\.claude\rules\lessons-learned.md"
-$Instincts = Read-FileOrEmpty "$env:USERPROFILE\.claude\rules\instincts.md"
+$LessonsLearned = Read-FileOrEmpty (Join-Path $HOME ".claude" "rules" "lessons-learned.md")
+$Instincts = Read-FileOrEmpty (Join-Path $HOME ".claude" "rules" "instincts.md")
 $Template = Get-Content $TemplateFile -Raw -Encoding UTF8
 
 # --- Step 2: Build dependency graph & waves ---
@@ -236,7 +236,7 @@ foreach ($waveIndex in 0..($Waves.Count - 1)) {
             $prompt = Build-Prompt -Feature $feature
 
             if ($DryRun) {
-                $promptFile = Join-Path $Project ".claude\turbo-dry-run-$($feature.id).md"
+                $promptFile = Join-Path $Project ".claude" "turbo-dry-run-$($feature.id).md"
                 $promptDir = Split-Path $promptFile -Parent
                 if (-not (Test-Path $promptDir)) { New-Item -ItemType Directory -Path $promptDir -Force | Out-Null }
                 $prompt | Out-File -FilePath $promptFile -Encoding UTF8
@@ -301,11 +301,11 @@ foreach ($waveIndex in 0..($Waves.Count - 1)) {
             Write-Status "Starting $($feature.id) — $($feature.name) [parallel]..." "Yellow"
 
             $prompt = Build-Prompt -Feature $feature
-            $promptFile = Join-Path $env:TEMP "turbo-$($feature.id).md"
+            $promptFile = Join-Path [System.IO.Path]::GetTempPath() "turbo-$($feature.id).md"
             $prompt | Out-File -FilePath $promptFile -Encoding UTF8
 
             if ($DryRun) {
-                $dryFile = Join-Path $Project ".claude\turbo-dry-run-$($feature.id).md"
+                $dryFile = Join-Path $Project ".claude" "turbo-dry-run-$($feature.id).md"
                 $dryDir = Split-Path $dryFile -Parent
                 if (-not (Test-Path $dryDir)) { New-Item -ItemType Directory -Path $dryDir -Force | Out-Null }
                 $prompt | Out-File -FilePath $dryFile -Encoding UTF8
@@ -378,7 +378,7 @@ foreach ($waveIndex in 0..($Waves.Count - 1)) {
     }
 
     # Refresh context between waves (Architecture.md may have changed)
-    $ArchMd = Read-FileOrEmpty (Join-Path $Project "docs\Architecture.md")
+    $ArchMd = Read-FileOrEmpty (Join-Path $Project "docs" "Architecture.md")
     if ($ArchMd -eq "(not found)") {
         $ArchMd = Read-FileOrEmpty (Join-Path $Project "Architecture.md")
     }
@@ -410,7 +410,7 @@ if ($Results.Skipped.Count -gt 0) {
 
 # --- Step 6: Decision Review ---
 
-$DecisionsLog = Join-Path $Project ".claude\decisions.log"
+$DecisionsLog = Join-Path $Project ".claude" "decisions.log"
 if (Test-Path $DecisionsLog) {
     $warnings = Get-Content $DecisionsLog -Encoding UTF8 | Where-Object { $_ -match 'WARNING' }
     if ($warnings.Count -gt 0) {
