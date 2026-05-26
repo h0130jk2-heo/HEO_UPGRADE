@@ -28,11 +28,12 @@ Claude Code can write code for you, but "code that works" and "code you can trus
   PHASE 1 — SHAPE                    PHASE 2 — BUILD (per feature)
   (idea → buildable scaffold)        (scaffold → verified feature)
 
-  /brainstorm  (smart-skip)          /feature-plan
-  /prd-creator                       [implement] + checkpoint every 5 edits
-  /architecture-sketch               /verify-stack (security/review/cross-model)
-  /init-project                      /feature-done (QA + commit)
-                                           ↻ loop
+  /brainstorm  (smart-skip)          /turbo-build (automated pipeline)
+  /prd-creator                        ── or manual ──
+  /architecture-sketch               /feature-plan
+  /init-project                      [implement] + checkpoint every 5 edits
+                                     /verify-stack (security/review/cross-model)
+                                     /feature-done (QA + commit)  ↻ loop
 
   PHASE 3 — SHIP (optional)          PHASE 4 — EVOLVE (continuous)
 
@@ -46,9 +47,9 @@ Claude Code can write code for you, but "code that works" and "code you can trus
   Memory & Learning Loop │ Confidence Tagging │ Cost Awareness │ Bilingual Artifacts
 ```
 
-## Skills (15)
+## Skills (16)
 
-<!-- 15개 스킬 목록. Phase별 분류. -->
+<!-- 16개 스킬 목록. Phase별 분류. -->
 
 | Phase | Skill | What it does |
 |---|---|---|
@@ -56,6 +57,7 @@ Claude Code can write code for you, but "code that works" and "code you can trus
 | SHAPE | `/prd-creator` | 6-section MoSCoW PRD via 1:1 chat |
 | SHAPE | `/architecture-sketch` | Tech stack + folder layout proposal before scaffolding |
 | SHAPE | `/init-project` | Scaffold files, CLAUDE.md, git init, language packs |
+| BUILD | `/turbo-build` | Automated pipeline: builds all features in fresh sessions (no context pollution) |
 | BUILD | `/feature-plan` | Live per-feature plan from current architecture state |
 | BUILD | `/verify-stack` | 3-layer review: security (hard block) → self-review → cross-model |
 | BUILD | `/feature-done` | Strict QA pipeline → `passes:true` → commit → next feature |
@@ -91,7 +93,10 @@ Claude Code can write code for you, but "code that works" and "code you can trus
 /architecture-sketch # review tech stack before coding
 /init-project        # scaffold and start building
 
-# 3. Per feature:
+# 3. Build all features automatically:
+/turbo-build         # runs each feature in a fresh session (recommended)
+
+# 3-alt. Or build one at a time (manual):
 /feature-plan        # plan → implement → /feature-done
 
 # 4. When ready to ship:
@@ -138,16 +143,18 @@ HEO_UPGRADE/
 ├── install.sh                     # macOS/Linux installer
 ├── docs/index.html                # HTML documentation page
 ├── framework/                     # Portable framework bundle
-│   ├── skills/                    # 15 skill definitions
+│   ├── skills/                    # 16 skill definitions
+│   ├── tools/                     # Automation scripts (turbo-pipeline.ps1)
 │   └── rules/                     # 4 cross-cutting rules
 └── .gitignore
 
 ~/.claude/
-├── skills/                        # 15 skill definitions (SKILL.md each)
+├── skills/                        # 16 skill definitions (SKILL.md each)
 │   ├── brainstorm/
 │   ├── architecture-sketch/
 │   ├── init-project/
 │   ├── prd-creator/
+│   ├── turbo-build/
 │   ├── feature-plan/
 │   ├── verify-stack/
 │   ├── feature-done/

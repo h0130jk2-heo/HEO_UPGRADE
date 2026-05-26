@@ -16,6 +16,7 @@ $FrameworkDir = Join-Path $RepoRoot 'framework'
 $ClaudeDir = Join-Path $env:USERPROFILE '.claude'
 $SkillsDst = Join-Path $ClaudeDir 'skills'
 $RulesDst = Join-Path $ClaudeDir 'rules'
+$ToolsDst = Join-Path $ClaudeDir 'tools'
 
 if (-not (Test-Path $FrameworkDir)) {
     Write-Error "framework/ directory not found. Run this script from the repo root."
@@ -28,6 +29,7 @@ Write-Host "Target : $ClaudeDir`n"
 
 New-Item -ItemType Directory -Force $SkillsDst | Out-Null
 New-Item -ItemType Directory -Force $RulesDst | Out-Null
+New-Item -ItemType Directory -Force $ToolsDst | Out-Null
 
 $skills = Get-ChildItem (Join-Path $FrameworkDir 'skills') -Directory
 $installed = 0
@@ -55,7 +57,26 @@ foreach ($rule in $rules) {
     }
 }
 
+$toolsSrc = Join-Path $FrameworkDir 'tools'
+$toolsInstalled = 0
+$toolsTotal = 0
+if (Test-Path $toolsSrc) {
+    $tools = Get-ChildItem $toolsSrc -File
+    $toolsTotal = $tools.Count
+    foreach ($tool in $tools) {
+        $dst = Join-Path $ToolsDst $tool.Name
+        if ((Test-Path $dst) -and -not $Force) {
+            Write-Host "  SKIP  $($tool.Name) (already exists, use -Force to overwrite)" -ForegroundColor Yellow
+        } else {
+            Copy-Item -Force $tool.FullName $dst
+            Write-Host "  OK    $($tool.Name)" -ForegroundColor Green
+            $toolsInstalled++
+        }
+    }
+}
+
 Write-Host "`n--- Result ---" -ForegroundColor Cyan
 Write-Host "Skills : $installed / $($skills.Count) installed"
 Write-Host "Rules  : $rulesInstalled / $($rules.Count) installed"
+Write-Host "Tools  : $toolsInstalled / $toolsTotal installed"
 Write-Host "`nDone. Restart Claude Code to pick up the new skills." -ForegroundColor Green

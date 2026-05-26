@@ -343,7 +343,7 @@
     <p class="subtitle">비개발자가 Claude Code로 소프트웨어를 만들기 위한 스킬 프레임워크. 막연한 아이디어부터 배포까지, 엔지니어링 전문 지식 없이도 작동하는 품질 게이트를 제공합니다.</p>
     <div class="badges">
         <span class="badge green">16/16 기능 완성</span>
-        <span class="badge blue">15개 스킬</span>
+        <span class="badge blue">16개 스킬</span>
         <span class="badge purple">4단계 Phase</span>
     </div>
 </div>
@@ -380,8 +380,8 @@
                 <h3><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="3" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 8l2 2 3-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Phase 2 &mdash; BUILD</h3>
                 <p class="phase-desc">뼈대 &rarr; 검증된 기능 (반복)</p>
                 <ul>
-                    <li><code>/feature-plan</code></li>
-                    <li>구현 + 매 5회 편집마다 체크포인트</li>
+                    <li><code>/turbo-build</code> <strong>자동 파이프라인 (권장)</strong></li>
+                    <li style="font-size:0.8rem;color:var(--text-muted);padding-left:0.5rem">&mdash; 또는 수동: feature-plan &rarr; 구현 &rarr; feature-done</li>
                     <li><code>/verify-stack</code> 3단계 리뷰</li>
                     <li><code>/feature-done</code> QA + 커밋</li>
                 </ul>
@@ -418,7 +418,7 @@
 
     <!-- 스킬 목록 -->
     <section>
-        <h2><span class="num">03</span>스킬 (15개)</h2>
+        <h2><span class="num">03</span>스킬 (16개)</h2>
         <table>
             <thead>
                 <tr><th>Phase</th><th>스킬</th><th>설명</th></tr>
@@ -428,6 +428,7 @@
                 <tr><td class="tag-shape">SHAPE</td><td><code>/prd-creator</code></td><td>6섹션 MoSCoW PRD를 1:1 대화로 작성</td></tr>
                 <tr><td class="tag-shape">SHAPE</td><td><code>/architecture-sketch</code></td><td>코딩 전 기술 스택 + 폴더 구조 제안</td></tr>
                 <tr><td class="tag-shape">SHAPE</td><td><code>/init-project</code></td><td>프로젝트 스캐폴딩, CLAUDE.md, git 초기화, 언어 팩</td></tr>
+                <tr><td class="tag-build">BUILD</td><td><code>/turbo-build</code></td><td>자동 파이프라인: 기능별 독립 세션으로 전체 빌드 (컨텍스트 오염 방지)</td></tr>
                 <tr><td class="tag-build">BUILD</td><td><code>/feature-plan</code></td><td>현재 아키텍처 상태 기반 기능별 실시간 계획</td></tr>
                 <tr><td class="tag-build">BUILD</td><td><code>/verify-stack</code></td><td>3단계 리뷰: 보안(차단) &rarr; 셀프 리뷰 &rarr; 크로스 모델</td></tr>
                 <tr><td class="tag-build">BUILD</td><td><code>/feature-done</code></td><td>엄격한 QA &rarr; passes:true &rarr; 커밋 &rarr; 다음 기능</td></tr>
@@ -454,7 +455,9 @@
             <span class="cmd">/prd-creator</span> &nbsp; <span class="comment"># 아이디어가 잡혔을 때</span><br>
             <span class="cmd">/architecture-sketch</span> &nbsp; <span class="comment"># 기술 스택 검토</span><br>
             <span class="cmd">/init-project</span> &nbsp; <span class="comment"># 스캐폴딩 후 코딩 시작</span><br><br>
-            <span class="comment"># 3. 기능별 반복</span><br>
+            <span class="comment"># 3. 기능 자동 빌드 (권장)</span><br>
+            <span class="cmd">/turbo-build</span> &nbsp; <span class="comment"># 전체 기능을 자동으로 빌드</span><br><br>
+            <span class="comment"># 3-alt. 수동 빌드 (한 기능씩)</span><br>
             <span class="cmd">/feature-plan</span> &rarr; 구현 &rarr; <span class="cmd">/feature-done</span><br><br>
             <span class="comment"># 4. 배포</span><br>
             <span class="cmd">/pre-ship-check</span> &rarr; <span class="cmd">/deploy</span> &rarr; <span class="cmd">/monitor</span><br><br>
@@ -474,12 +477,12 @@
             <button class="install-tab" onclick="showTab('unix')">macOS / Linux</button>
         </div>
         <div class="install-code active" id="tab-win">
-            <span style="color:var(--text-muted)">git clone &lt;repo-url&gt;<br>cd HEO_UPGRADE<br><br></span>
+            <span style="color:var(--text-muted)">git clone https://github.com/h0130jk2-heo/HEO_UPGRADE.git<br>cd HEO_UPGRADE<br><br></span>
             <span style="color:var(--green)">.\install.ps1</span><span style="color:var(--text-muted)"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 처음 설치</span><br>
             <span style="color:var(--green)">.\install.ps1 -Force</span><span style="color:var(--text-muted)"> &nbsp;# 덮어쓰기</span>
         </div>
         <div class="install-code" id="tab-unix">
-            <span style="color:var(--text-muted)">git clone &lt;repo-url&gt;<br>cd HEO_UPGRADE<br><br></span>
+            <span style="color:var(--text-muted)">git clone https://github.com/h0130jk2-heo/HEO_UPGRADE.git<br>cd HEO_UPGRADE<br><br></span>
             <span style="color:var(--green)">bash install.sh</span><span style="color:var(--text-muted)"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 처음 설치</span><br>
             <span style="color:var(--green)">bash install.sh --force</span><span style="color:var(--text-muted)"> &nbsp;# 덮어쓰기</span>
         </div>
@@ -515,7 +518,7 @@
 </div>
 
 <footer>
-    HEO_UPGRADE 프레임워크 &middot; <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a>로 제작 &middot; 16개 기능, 10개 세션, 비개발자 1인
+    <a href="https://github.com/h0130jk2-heo/HEO_UPGRADE">GitHub</a> &middot; HEO_UPGRADE 프레임워크 &middot; <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a>로 제작 &middot; 16개 기능, 10개 세션, 비개발자 1인
 </footer>
 
 <script>
