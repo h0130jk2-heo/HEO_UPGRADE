@@ -36,6 +36,14 @@ Scan ALL changed files for these 6 universal patterns:
 | 5 | Hardcoded credentials | Passwords, connection strings in source | `mongodb://user:pass@`, `postgres://...` |
 | 6 | Path traversal | User input in file paths without sanitization | `open(user_path)`, `fs.readFile(req.params.file)` |
 
+### Depth: core vs strict
+
+- **Default:** scan the 6 core patterns above.
+- **Strict:** when the user passes `--strict`, OR the PRD/ARCHITECTURE_PROPOSAL marks the project
+  production-grade, load `references/security-checklist.md` and evaluate all 15 items. Extended
+  items follow the same Hard-Block rule as core patterns on Must-have surfaces.
+- These are app-level checks only. Cloud-infra/deployment security is out of scope (HEO deploy/monitor own that).
+
 ### LLM False-Positive Suppression
 
 After static scan finds hits, review each hit in context:
