@@ -38,11 +38,10 @@ Scan ALL changed files for these 6 universal patterns:
 
 ### Depth: core vs strict
 
-- **Default:** scan the 6 core patterns above.
-- **Strict:** when the user passes `--strict`, OR the PRD/ARCHITECTURE_PROPOSAL marks the project
-  production-grade, load `references/security-checklist.md` and evaluate all 15 items. Extended
-  items follow the same Hard-Block rule as core patterns on Must-have surfaces.
-- These are app-level checks only. Cloud-infra/deployment security is out of scope (HEO deploy/monitor own that).
+- **Default:** scan the 6 core patterns above. **Strict** (`--strict` flag, or a production-grade
+  PRD/ARCHITECTURE_PROPOSAL): also load `references/security-checklist.md` and evaluate all 15
+  items, same Hard-Block rule as core on Must-have surfaces.
+- App-level checks only — cloud-infra/deployment security is out of scope (HEO deploy/monitor own that).
 
 ### LLM False-Positive Suppression
 
@@ -110,11 +109,8 @@ User can override with reason → record override reason in report.
 
 <!-- Gemini CLI로 교차 검증. 없으면 skip. 결과는 경고만, 차단 안 함. -->
 
-**Trigger:** Conditional — fires when ANY of:
-- Diff exceeds 100 changed lines
-- Self-review confidence < 70%
-- User passed `--strict` flag
-- User explicitly requests it
+**Trigger:** Conditional — fires when the diff exceeds 100 changed lines, self-review confidence is
+below 70%, the user passed `--strict`, or the user explicitly requests it.
 
 **Failure mode:** Warn only — logged in report, does not block.
 

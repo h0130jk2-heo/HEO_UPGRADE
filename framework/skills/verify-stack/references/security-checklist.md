@@ -1,4 +1,4 @@
-<!-- verify-stack Layer 1의 전체(strict) 보안 체크리스트. 앱 레벨 중심, AWS 인프라 규칙 제외. -->
+<!-- verify-stack Layer 1의 전체(strict) 보안 체크리스트. 앱 레벨 중심, 클라우드 인프라 규칙 제외. -->
 # Security Checklist (App-Level)
 
 Loaded on `--strict` or when the PRD is production-grade. Each item is compliant / non-compliant / N/A.
@@ -24,6 +24,6 @@ Non-compliant items on a Must-have surface are HARD BLOCK (same as Layer 1 core 
 15. **Deny-by-default network posture** *(only if the app defines its own firewall/CORS rules)* — restrict CORS origins (never `*` on authenticated endpoints); open only required ports. Provider-neutral principle; skip infra specifics.
 
 ## Excluded (cloud-infrastructure / deployment-coupled — out of scope for HEO)
-Network intermediary access logging, cloud network-gateway topology, service quotas, cross-region/zone
-redundancy, disaster-recovery strategies, infra-as-code hardening — out of scope for HEO (deployment
-handled by HEO's own deploy/monitor).
+Provider-level infrastructure hardening and deployment-layer security posture are out of scope for
+this app-level checklist — that responsibility belongs to HEO's own deploy/monitor skills, not
+verify-stack.
