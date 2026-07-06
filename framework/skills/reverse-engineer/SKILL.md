@@ -102,4 +102,4 @@ Then confirm:
 - **NEVER fabricate architecture.** If unsure, tag `[guess]` and say so.
 - **NEVER dump raw file contents** to the user — always summarize.
 - **ALWAYS present the summary in Korean and wait** before writing artifacts.
-- **ALWAYS write artifacts in HEO format** (Architecture.md), never AIDLC formats.
+- **ALWAYS write artifacts in HEO format** (Architecture.md), never another framework's format.
