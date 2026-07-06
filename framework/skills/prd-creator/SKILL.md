@@ -31,6 +31,33 @@ Work through these naturally — not as a checklist the user sees. You decide th
 5. **Done criteria** — Concrete, observable behaviors that signal "this works"
 6. **Constraints** — Technology limits, team size, timeline, known blockers
 
+## Adaptive Depth
+
+<!-- 요청의 명확도·복잡도에 따라 PRD 깊이를 조절. minimal/standard/comprehensive 3단계를 HEO의 1:1 대화 방식에 맞게 적용. -->
+
+Assess the request and pick a depth (state your pick to the user in one line, let them override):
+
+- **Minimal** — a clear, small, single-user tool → the 6 core sections, kept terse.
+- **Standard** — normal feature/product → 6 sections with substantive detail. (Default.)
+- **Comprehensive** — complex, multi-user, or multiple interacting features → 6 sections
+  PLUS a **User Stories** section (Step below).
+
+Heuristic for comprehensive: ≥ 2 distinct user types, OR features that interact/depend on
+each other, OR the user explicitly asks for stories/acceptance criteria. When in doubt, stay Standard.
+
+## User Stories (comprehensive only)
+
+When depth = comprehensive, after the 6 sections are covered, elicit user stories conversationally
+(still one question at a time — never an A/B/C answer-file):
+
+- For each primary user type, capture 2–5 stories in the form:
+  *"As a [user], I want [capability], so that [outcome]."*
+- For each story, capture 1–3 **acceptance criteria** (observable pass/fail conditions).
+- **Traceability:** tag each story with the MoSCoW feature(s) it maps to (e.g., `→ Must: 로그인`),
+  so Done Criteria and features stay linked.
+
+Skip this section entirely for minimal/standard projects — do not force stories on simple tools.
+
 ## Conversation Flow
 
 ```
@@ -91,3 +118,4 @@ For quantitative verification, check:
 - [ ] Features categorized into Must / Should / Won't
 - [ ] Done criteria are observable behaviors (not feelings or vague goals)
 - [ ] Constraints section is specific (not "we'll figure it out")
+- [ ] If depth = comprehensive: User Stories present, each with acceptance criteria and a MoSCoW traceability tag

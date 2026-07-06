@@ -53,6 +53,18 @@
 
 ---
 
+## User Stories
+<!-- comprehensive 깊이에서만 채움. minimal/standard면 이 섹션 삭제. -->
+
+> Only for complex / multi-user projects. Delete this section for simple tools.
+
+### [User Type]
+- **Story:** As a [user], I want [capability], so that [outcome].
+  - Acceptance criteria: [observable condition]
+  - Traceability: → [Must/Should feature it maps to]
+
+---
+
 ## Constraints
 
 | Type | Detail |
