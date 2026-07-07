@@ -4,3 +4,8 @@
 # OS / editor
 Thumbs.db
 .DS_Store
+
+# Local dev scratch — never publish (SDD ledger/reports, brainstorming specs/plans, generated outputs)
+.superpowers/
+docs/superpowers/
+output/
