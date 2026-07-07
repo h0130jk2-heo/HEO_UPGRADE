@@ -73,6 +73,8 @@ Match into one of 4 categories:
 ### State D — No project
 **Signals:**
 - None of `feature_list.json`, `progress.md`, `HANDOFF.md`, `PRD.md` exist
+- AND no existing source code in the workspace (if source exists without HEO artifacts, that is State C brownfield, not State D)
+  (소스 코드가 있으면 State D가 아니라 State C 브라운필드로 분류)
 - Possibly `BRAINSTORM.md` exists (mid-brainstorm pause)
 
 **Likely:** No project yet. User wants to start fresh.
