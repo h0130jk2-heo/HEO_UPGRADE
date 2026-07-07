@@ -373,6 +373,7 @@
                     <li><code>/brainstorm</code> 스마트 스킵</li>
                     <li><code>/prd-creator</code></li>
                     <li><code>/architecture-sketch</code></li>
+                    <li><code>/reverse-engineer</code> 브라운필드</li>
                     <li><code>/init-project</code></li>
                 </ul>
             </div>
@@ -425,12 +426,13 @@
             </thead>
             <tbody>
                 <tr><td class="tag-shape">SHAPE</td><td><code>/brainstorm</code></td><td>아이디어가 막연할 때 발산 &rarr; 수렴 사고</td></tr>
-                <tr><td class="tag-shape">SHAPE</td><td><code>/prd-creator</code></td><td>6섹션 MoSCoW PRD를 1:1 대화로 작성</td></tr>
-                <tr><td class="tag-shape">SHAPE</td><td><code>/architecture-sketch</code></td><td>코딩 전 기술 스택 + 폴더 구조 제안</td></tr>
+                <tr><td class="tag-shape">SHAPE</td><td><code>/prd-creator</code></td><td>적응형 깊이 MoSCoW PRD를 1:1 대화로 작성 (복잡 시 User Story + 수용 기준)</td></tr>
+                <tr><td class="tag-shape">SHAPE</td><td><code>/architecture-sketch</code></td><td>코딩 전 기술 스택 + 폴더 구조 제안 (조건부 프로바이더 중립 NFR 패턴)</td></tr>
+                <tr><td class="tag-shape">SHAPE</td><td><code>/reverse-engineer</code></td><td>기존 코드베이스를 HEO 산출물로 분석 (브라운필드 진입점)</td></tr>
                 <tr><td class="tag-shape">SHAPE</td><td><code>/init-project</code></td><td>프로젝트 스캐폴딩, CLAUDE.md, git 초기화, 언어 팩</td></tr>
                 <tr><td class="tag-build">BUILD</td><td><code>/turbo-build</code></td><td>자동 파이프라인: 기능별 독립 세션으로 전체 빌드 (컨텍스트 오염 방지)</td></tr>
                 <tr><td class="tag-build">BUILD</td><td><code>/feature-plan</code></td><td>현재 아키텍처 상태 기반 기능별 실시간 계획</td></tr>
-                <tr><td class="tag-build">BUILD</td><td><code>/verify-stack</code></td><td>3단계 리뷰: 보안(차단) &rarr; 셀프 리뷰 &rarr; 크로스 모델</td></tr>
+                <tr><td class="tag-build">BUILD</td><td><code>/verify-stack</code></td><td>3단계 리뷰: 보안(차단, strict 시 앱레벨 15항목 체크리스트) &rarr; 셀프 리뷰 &rarr; 크로스 모델</td></tr>
                 <tr><td class="tag-build">BUILD</td><td><code>/feature-done</code></td><td>엄격한 QA &rarr; passes:true &rarr; 커밋 &rarr; 다음 기능</td></tr>
                 <tr><td class="tag-ship">SHIP</td><td><code>/pre-ship-check</code></td><td>5가지 출시 준비 진단</td></tr>
                 <tr><td class="tag-ship">SHIP</td><td><code>/deploy</code></td><td>플랫폼 자동 감지 배포 + git 태그 + 롤백 등록</td></tr>
