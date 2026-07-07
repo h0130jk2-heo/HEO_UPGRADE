@@ -6,7 +6,25 @@
 
 A skill framework for non-developers building software with [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Four phases guide a project from fuzzy idea to deployed product, with quality gates the user doesn't need engineering expertise to operate.
 
-**[HTML Documentation](docs/index.html)** | **[GitHub Repository](https://github.com/h0130jk2-heo/HEO_UPGRADE)**
+**[HTML Documentation](docs/index.html)** | **[GitHub Repository](https://github.com/h0130jk2-heo/HEO_UPGRADE)** | **[Changelog](CHANGELOG.md)**
+
+> **Version 2 (2026-07-06) — "Brownfield & Rigor Update"**: 1 new skill + 4 enhanced skills — brownfield codebase adoption, a deeper app-level security checklist, requirements depth with user stories, and provider-neutral NFR patterns. See [What's New in v2](#whats-new-in-v2) below or the full [CHANGELOG](CHANGELOG.md).
+
+## What's New in v2
+
+<!-- v2 변경 이력. 브라운필드 진입점 + 앞단 엄격성 강화. 배포는 프로바이더 중립 유지. -->
+
+v2 deepens HEO's front-end rigor and adds a **brownfield entry point** for existing codebases, while keeping **deployment provider-neutral** (no cloud lock-in) and preserving HEO conventions (bilingual artifacts, confidence tags, lightweight opt-in gates).
+
+| Skill | Type | Before → After |
+|---|---|---|
+| `/reverse-engineer` | **NEW** | *(did not exist)* → Analyzes an existing codebase → `Architecture.md` + component inventory + dependency map. Read-only. Wired into `/resume-heo` State C so inherited projects have a brownfield entry point. |
+| `/verify-stack` | Enhanced | Security = 6 static patterns → **15-item app-level checklist** (`references/security-checklist.md`), opt-in via `--strict` or a production-grade PRD. Cloud-infra rules (network gateways, redundancy, quotas) excluded — HEO's `/deploy` owns deployment. Report `Summary` structure unchanged. |
+| `/prd-creator` | Enhanced | Fixed 6-section PRD → **adaptive depth** (minimal / standard / comprehensive) + **conditional User Stories** with acceptance criteria and MoSCoW traceability for complex/multi-user projects (auto-skipped for simple tools). 1:1 chat style kept. |
+| `/architecture-sketch` | Enhanced | Stack + folder proposal → **+ conditional provider-neutral NFR patterns** (performance targets, resilience: timeouts/circuit-breaker/graceful-degradation, scalability). Surfaced only for M/L projects. No infra/deploy/cloud specifics. |
+| `/resume-heo` | Enhanced | 4-state router → State C now **detects brownfield** (source present, no HEO artifacts) and routes to `/reverse-engineer`; State C vs State D made mutually exclusive. |
+
+**Counts:** skills 16 → 17; features 16 → 20 (F017–F020, all `passes:true`).
 
 ## Why This Exists
 
@@ -180,6 +198,7 @@ HEO_UPGRADE/
 
 <!-- 현재 상태 -->
 
+- **Version**: v2 (2026-07-06) — Brownfield & Rigor Update
 - **Framework build**: Complete (20/20 features, 11 sessions)
 - **Success criteria**: 3/7 verified now, 3 deferred to first real project, 1 minor (15 vs 14 skills)
 - **Next milestone**: First real project end-to-end using the full SHAPE → BUILD → SHIP flow

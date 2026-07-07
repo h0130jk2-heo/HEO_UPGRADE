@@ -342,6 +342,7 @@
     <h1>HEO_UPGRADE</h1>
     <p class="subtitle">비개발자가 Claude Code로 소프트웨어를 만들기 위한 스킬 프레임워크. 막연한 아이디어부터 배포까지, 엔지니어링 전문 지식 없이도 작동하는 품질 게이트를 제공합니다.</p>
     <div class="badges">
+        <span class="badge purple">v2</span>
         <span class="badge green">20/20 기능 완성</span>
         <span class="badge blue">17개 스킬</span>
         <span class="badge purple">4단계 Phase</span>
@@ -515,6 +516,25 @@
                 <p>기능 중간에 작업을 멈춰도 컨텍스트 유실 없이 재개할 수 있습니다. /handoff가 캡처하고, /resume-heo가 복원합니다.</p>
             </div>
         </div>
+    </section>
+
+    <!-- 변경 이력 -->
+    <section>
+        <h2><span class="num">07</span>변경 이력 &mdash; v2</h2>
+        <p><strong>v2 (2026-07-06) &mdash; "브라운필드 &amp; 엄격성 강화"</strong>. 신규 스킬 1개와 강화 스킬 4개로 기존 코드베이스 인수, 앱레벨 보안 심화, 요구사항 깊이, 프로바이더 중립 NFR 패턴을 추가했습니다. <strong>배포는 특정 클라우드에 종속되지 않고 프로바이더 중립</strong>을 유지하며, HEO 규약(이중언어 산출물, 신뢰도 태그, 경량 opt-in 게이트)을 그대로 지킵니다.</p>
+        <table>
+            <thead>
+                <tr><th>스킬</th><th>유형</th><th>변경 전 &rarr; 변경 후</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>/reverse-engineer</code></td><td class="tag-shape">신규</td><td><em>(없었음)</em> &rarr; 기존 코드베이스 분석 &rarr; Architecture.md + 컴포넌트 인벤토리 + 의존성 맵 (읽기 전용). <code>/resume-heo</code> State C에 연결해 브라운필드 진입점 제공.</td></tr>
+                <tr><td><code>/verify-stack</code></td><td class="tag-build">강화</td><td>보안 6개 정적 패턴 &rarr; <strong>앱레벨 15항목 체크리스트</strong> (<code>--strict</code>/production-grade 시 opt-in). 클라우드 인프라 규칙(네트워크 게이트웨이·이중화·쿼터) 제외 &mdash; 배포는 <code>/deploy</code> 담당. 리포트 Summary 구조 불변.</td></tr>
+                <tr><td><code>/prd-creator</code></td><td class="tag-build">강화</td><td>고정 6섹션 PRD &rarr; <strong>적응형 깊이</strong>(minimal/standard/comprehensive) + 복잡·다중 사용자 프로젝트에 <strong>User Story·수용 기준·MoSCoW 추적성</strong> (간단한 건 자동 skip). 1:1 대화 방식 유지.</td></tr>
+                <tr><td><code>/architecture-sketch</code></td><td class="tag-build">강화</td><td>스택·구조 제안 &rarr; <strong>+ 조건부 프로바이더 중립 NFR 패턴</strong>(성능 목표, 복원력: 타임아웃·서킷브레이커·우아한 성능저하, 확장성). M/L 프로젝트에서만. 인프라·배포·클라우드 세부사항 없음.</td></tr>
+                <tr><td><code>/resume-heo</code></td><td class="tag-evolve">강화</td><td>4상태 라우터 &rarr; State C가 <strong>브라운필드 감지</strong>(소스 있고 HEO 산출물 없음) 시 <code>/reverse-engineer</code>로 라우팅. State C와 State D 상호 배타.</td></tr>
+            </tbody>
+        </table>
+        <p style="color:var(--text-muted);font-size:0.9rem">스킬 16 &rarr; 17 &middot; 기능 16 &rarr; 20 (F017&ndash;F020, 모두 passes:true) &middot; 전체 로그: <code>CHANGELOG.md</code></p>
     </section>
 
 </div>
