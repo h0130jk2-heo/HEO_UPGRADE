@@ -388,6 +388,38 @@
         ],
         "complexity": "S"
       }
+    },
+    {
+      "id": "F017",
+      "name": "reverse-engineer skill",
+      "priority": "Should",
+      "passes": true,
+      "description": "New brownfield skill: analyze existing codebase → Architecture.md + component inventory + dependency map; wired into resume-heo State C",
+      "phase": "SHAPE"
+    },
+    {
+      "id": "F018",
+      "name": "verify-stack security expansion",
+      "priority": "Should",
+      "passes": true,
+      "description": "Layer 1 expanded to 15-item app-level security checklist (references/security-checklist.md), opt-in via --strict/production-grade; AWS cloud-infra rules stripped",
+      "phase": "BUILD"
+    },
+    {
+      "id": "F019",
+      "name": "prd-creator requirements rigor",
+      "priority": "Should",
+      "passes": true,
+      "description": "Adaptive depth (minimal/standard/comprehensive) + conditional User Stories with acceptance criteria and MoSCoW traceability",
+      "phase": "SHAPE"
+    },
+    {
+      "id": "F020",
+      "name": "architecture-sketch NFR patterns",
+      "priority": "Should",
+      "passes": true,
+      "description": "Conditional provider-neutral NFR patterns (performance/resilience/scalability); infra/deploy/DR/AWS excluded",
+      "phase": "SHAPE"
     }
   ]
 }

@@ -8,7 +8,7 @@ description: Use when the user wants to define what to build before coding, writ
 ## Overview
 
 Guide the user through a 1:1 conversation to produce a complete `PRD.md`. One question at a time. Natural flow. No forms, no pressure.
-d
+
 The goal is to make the user feel like they're talking to a thoughtful product manager — not filling out a template.
 
 ## Conversation Rules

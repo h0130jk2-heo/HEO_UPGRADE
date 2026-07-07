@@ -47,19 +47,20 @@ Claude Code can write code for you, but "code that works" and "code you can trus
   Memory & Learning Loop │ Confidence Tagging │ Cost Awareness │ Bilingual Artifacts
 ```
 
-## Skills (16)
+## Skills (17)
 
-<!-- 16개 스킬 목록. Phase별 분류. -->
+<!-- 17개 스킬 목록. Phase별 분류. -->
 
 | Phase | Skill | What it does |
 |---|---|---|
 | SHAPE | `/brainstorm` | Divergent → convergent ideation when the idea is vague |
-| SHAPE | `/prd-creator` | 6-section MoSCoW PRD via 1:1 chat |
-| SHAPE | `/architecture-sketch` | Tech stack + folder layout proposal before scaffolding |
+| SHAPE | `/prd-creator` | Adaptive-depth MoSCoW PRD via 1:1 chat, with conditional User Stories + acceptance criteria for complex projects |
+| SHAPE | `/architecture-sketch` | Tech stack + folder layout proposal, with conditional provider-neutral NFR patterns (performance/resilience/scalability) |
 | SHAPE | `/init-project` | Scaffold files, CLAUDE.md, git init, language packs |
+| SHAPE | `/reverse-engineer` | Analyze an existing codebase into HEO artifacts (brownfield entry) |
 | BUILD | `/turbo-build` | Automated pipeline: builds all features in fresh sessions (no context pollution) |
 | BUILD | `/feature-plan` | Live per-feature plan from current architecture state |
-| BUILD | `/verify-stack` | 3-layer review: security (hard block) → self-review → cross-model |
+| BUILD | `/verify-stack` | 3-layer review: security (hard block, strict app-level checklist opt-in) → self-review → cross-model |
 | BUILD | `/feature-done` | Strict QA pipeline → `passes:true` → commit → next feature |
 | SHIP | `/pre-ship-check` | 5-check ship-readiness diagnostic |
 | SHIP | `/deploy` | Platform-detected deploy + git tag + rollback registration |
@@ -144,17 +145,18 @@ HEO_UPGRADE/
 ├── install.sh                     # macOS/Linux installer
 ├── docs/index.html                # HTML documentation page
 ├── framework/                     # Portable framework bundle
-│   ├── skills/                    # 16 skill definitions
+│   ├── skills/                    # 17 skill definitions
 │   ├── tools/                     # Automation scripts (turbo-pipeline.ps1)
 │   └── rules/                     # 4 cross-cutting rules
 └── .gitignore
 
 ~/.claude/
-├── skills/                        # 16 skill definitions (SKILL.md each)
+├── skills/                        # 17 skill definitions (SKILL.md each)
 │   ├── brainstorm/
 │   ├── architecture-sketch/
 │   ├── init-project/
 │   ├── prd-creator/
+│   ├── reverse-engineer/
 │   ├── turbo-build/
 │   ├── feature-plan/
 │   ├── verify-stack/
