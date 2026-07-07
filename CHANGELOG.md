@@ -47,6 +47,14 @@ HEO conventions (bilingual artifacts, confidence tags, lightweight opt-in gates)
 - **Kept HEO's lightweight gates**: opt-in gates and confidence tags rather than heavy
   per-stage approval ceremony or mandatory audit logging.
 
+### Installer
+<!-- 업데이트 시 사용자 학습 데이터 보호. -->
+- `install.ps1` / `install.sh` now treat `instincts.md` and `lessons-learned.md` as **user data**:
+  they are never overwritten, even with `-Force` / `--force` (created only if absent, shown as
+  `KEEP`). This makes updating an existing install safe. Static convention rules
+  (`confidence-tags.md`, `cost-awareness.md`) and all skills are still updated by `-Force`.
+- Documented the v1 → v2 update flow (`git pull` + `-Force`/`--force` + restart) in README and the HTML docs.
+
 ### Docs & tracking
 - `README.md`: skills 16 → 17 (new `/reverse-engineer` row + updated enhanced-skill
   descriptions), added "What's New in v2", version marker, and this changelog link.

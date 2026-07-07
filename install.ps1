@@ -44,11 +44,16 @@ foreach ($skill in $skills) {
     }
 }
 
+# instincts.md / lessons-learned.md accumulate the user's learning data — NEVER overwrite them,
+# even with -Force. They are created only on a fresh install where they don't yet exist.
+$UserDataRules = @('instincts.md', 'lessons-learned.md')
 $rules = Get-ChildItem (Join-Path $FrameworkDir 'rules') -File
 $rulesInstalled = 0
 foreach ($rule in $rules) {
     $dst = Join-Path $RulesDst $rule.Name
-    if ((Test-Path $dst) -and -not $Force) {
+    if (($UserDataRules -contains $rule.Name) -and (Test-Path $dst)) {
+        Write-Host "  KEEP  $($rule.Name) (user data preserved, never overwritten)" -ForegroundColor Cyan
+    } elseif ((Test-Path $dst) -and -not $Force) {
         Write-Host "  SKIP  $($rule.Name) (already exists, use -Force to overwrite)" -ForegroundColor Yellow
     } else {
         Copy-Item -Force $rule.FullName $dst

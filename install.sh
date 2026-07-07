@@ -40,13 +40,18 @@ for skill_dir in "$FRAMEWORK_DIR"/skills/*/; do
     fi
 done
 
+# instincts.md / lessons-learned.md accumulate the user's learning data — NEVER overwrite them,
+# even with --force. They are created only on a fresh install where they don't yet exist.
+USER_DATA_RULES=" instincts.md lessons-learned.md "
 rules_installed=0
 rules_total=0
 for rule_file in "$FRAMEWORK_DIR"/rules/*.md; do
     rule_name="$(basename "$rule_file")"
     rules_total=$((rules_total + 1))
     dst="$RULES_DST/$rule_name"
-    if [ -f "$dst" ] && [ "$FORCE" != "--force" ]; then
+    if [ -f "$dst" ] && [[ "$USER_DATA_RULES" == *" $rule_name "* ]]; then
+        echo "  KEEP  $rule_name (user data preserved, never overwritten)"
+    elif [ -f "$dst" ] && [ "$FORCE" != "--force" ]; then
         echo "  SKIP  $rule_name (already exists, use --force to overwrite)"
     else
         cp "$rule_file" "$dst"

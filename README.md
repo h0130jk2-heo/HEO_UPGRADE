@@ -147,6 +147,36 @@ bash install.sh --force  # overwrite existing
 
 The scripts copy `framework/skills/` → `~/.claude/skills/` and `framework/rules/` → `~/.claude/rules/`. Existing files are skipped unless `-Force` / `--force` is used.
 
+### Updating an existing install (v1 → v2)
+
+<!-- 기존 설치자 업데이트 방법. -Force가 필요하지만 학습 데이터는 자동 보존됨. -->
+
+A plain install **skips files that already exist**, so it would add the new `/reverse-engineer` skill but leave your other skills on v1. To actually update the changed skills, pull the latest and re-install with `-Force` / `--force`:
+
+**Windows (PowerShell):**
+```powershell
+git pull
+.\install.ps1 -Force
+```
+
+**macOS / Linux:**
+```bash
+git pull
+bash install.sh --force
+```
+
+Then **restart Claude Code** so it reloads the skills.
+
+**Your learning data is safe.** `-Force` / `--force` overwrites skill files and the static
+convention rules (`confidence-tags.md`, `cost-awareness.md`) with the new versions, but
+**`instincts.md` and `lessons-learned.md` are never overwritten** — the installer treats them as
+user data and only creates them if they don't yet exist. On update you'll see them marked
+`KEEP  (user data preserved)` in the output.
+
+> ⚠️ These two files live in `~/.claude/rules/` (per-machine, per-user) and are **not** tracked in
+> this repo. If you want them backed up or synced across machines, copy them manually — the
+> installer will never touch existing copies.
+
 ## File Structure
 
 <!-- 프로젝트 루트 파일 구조 -->

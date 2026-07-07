@@ -489,6 +489,19 @@
             <span style="color:var(--green)">bash install.sh</span><span style="color:var(--text-muted)"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 처음 설치</span><br>
             <span style="color:var(--green)">bash install.sh --force</span><span style="color:var(--text-muted)"> &nbsp;# 덮어쓰기</span>
         </div>
+
+        <h3 style="margin-top:1.6rem">기존 설치 업데이트 (v1 &rarr; v2)</h3>
+        <p>그냥 설치하면 <strong>이미 있는 파일은 건너뛰어서</strong>, 새 <code>/reverse-engineer</code>만 추가되고 나머지 스킬은 v1로 남습니다. 바뀐 스킬까지 갱신하려면 최신을 받은 뒤 <code>-Force</code> / <code>--force</code>로 재설치하세요.</p>
+        <div class="install-code active">
+            <span style="color:var(--text-muted)"># Windows</span><br>
+            <span style="color:var(--green)">git pull</span><br>
+            <span style="color:var(--green)">.\install.ps1 -Force</span><br><br>
+            <span style="color:var(--text-muted)"># macOS / Linux</span><br>
+            <span style="color:var(--green)">git pull</span><br>
+            <span style="color:var(--green)">bash install.sh --force</span>
+        </div>
+        <p style="margin-top:0.8rem">그다음 <strong>Claude Code를 재시작</strong>하면 새 스킬이 로드됩니다.</p>
+        <p><strong>학습 데이터는 안전합니다.</strong> <code>-Force</code>는 스킬과 정적 규칙(<code>confidence-tags.md</code>, <code>cost-awareness.md</code>)만 새 버전으로 덮어쓰고, <code>instincts.md</code>와 <code>lessons-learned.md</code>는 <strong>절대 덮어쓰지 않습니다</strong> &mdash; 설치기가 사용자 데이터로 취급해 없을 때만 생성합니다. 업데이트 시 출력에 <code>KEEP (user data preserved)</code>로 표시됩니다. 이 두 파일은 <code>~/.claude/rules/</code>에 있고 저장소에는 포함되지 않으니, 백업·동기화가 필요하면 직접 복사하세요.</p>
     </section>
 
     <!-- 설계 원칙 -->
