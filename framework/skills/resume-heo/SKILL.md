@@ -65,6 +65,8 @@ Match into one of 4 categories:
 **Signals:**
 - `feature_list.json` exists BUT no `HANDOFF.md` (or HANDOFF.md is older than 7 days)
 - OR `progress.md` exists but no recent activity
+- OR existing source code is present BUT no `Architecture.md` and no `feature_list.json`
+  (brownfield project HEO has never analyzed)
 
 **Likely:** User returning to a stale project. Needs orientation.
 
@@ -128,13 +130,18 @@ Present:
   • progress.md 마지막 항목: [tail 1 line]
 
 ▶ 어떤 작업으로 가실래요?
-  1. 미완료 기능 중 골라서 (F[XXX], F[YYY], ...)
-  2. 코드베이스 점검 먼저 (/project-doctor)
-  3. CLAUDE.md 정리 (/optimize-claude-md)
-  4. 다른 작업 (자유 입력)
+  1. 미완료 기능 중 골라서 (F[XXX], F[YYY], ...)   [feature_list.json 있을 때만]
+  2. 기존 코드부터 파악 (/reverse-engineer)          [코드는 있는데 Architecture.md/feature_list.json이 없을 때]
+  3. 코드베이스 점검 (/project-doctor)
+  4. CLAUDE.md 정리 (/optimize-claude-md)
+  5. 다른 작업 (자유 입력)
 ```
 
 Wait for user choice.
+
+<!-- 브라운필드 신호(코드 존재 + HEO 산출물 없음)면 옵션 2를 먼저 추천한다. -->
+If the brownfield signal fired (source present, no HEO artifacts), recommend option 2 first —
+HEO's other skills need `Architecture.md` to work on inherited code.
 
 ### State D — No project
 
