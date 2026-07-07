@@ -99,3 +99,19 @@
 - Last feature: F016 (completed — final feature)
 - This session: built SHIP phase (F014 pre-ship-check + F015 deploy + F016 monitor); ran /project-doctor (PRD drift 6 items fixed); ran /reflect (2 upgrades, 1 merge)
 - Next: Framework complete (16/16). Ready for first real project dogfood.
+
+- [2026-07-07] F017 reverse-engineer skill: new brownfield skill (Architecture.md + component inventory + dependency map from an existing codebase); wired into resume-heo State C as the recommended first move when source exists but no HEO artifacts do
+- [2026-07-07] F018 verify-stack security expansion: Layer 1 gained a 15-item app-level security checklist (`references/security-checklist.md`), opt-in via `--strict`/production-grade PRD flag; verify-report `Summary`/`Recommendation:` structure feature-done depends on is unchanged
+- [2026-07-07] F019 prd-creator requirements rigor: adaptive depth (minimal/standard/comprehensive) picked per request complexity; conditional User Stories section (comprehensive only) with acceptance criteria and MoSCoW traceability tags
+- [2026-07-07] F020 architecture-sketch NFR patterns: conditional "NFR Patterns" section (M/L complexity or reliability-critical only) covering performance targets, resilience (timeouts/circuit-breaker/graceful degradation), and scalability — provider-neutral, no infra/deploy content
+
+## AIDLC-Strengths Port — 2026-07-07 (session 11)
+<!-- AIDLC 강점 이식 완료 기록. 신규 스킬 1개 + 기존 스킬 3개 강화 + resume-heo 연동. -->
+- Mode: heo-active
+- Tier: Advanced
+- Scope: ported AIDLC's security rigor, requirements rigor, NFR design patterns, and brownfield reverse-engineering into HEO_UPGRADE as native skills, per `docs/superpowers/plans/2026-07-06-aidlc-port.md`
+- Shipped: 1 new skill (`reverse-engineer`) + 4 enhancements (`verify-stack` strict security checklist, `prd-creator` adaptive depth + user stories, `architecture-sketch` NFR patterns, `resume-heo` brownfield routing to `/reverse-engineer`)
+- Verification: each task's structure-spec checks (frontmatter, required sections, line budget ≤ 220) passed before/after edits; negative greps confirmed no AWS-infra terms (Multi-AZ/RTO/RPO/NAT/Well-Architected/etc.) and no AIDLC traces (`aidlc`, `audit.md`, `[Answer]:` question-file style) in any shipped skill file; dogfood runs recorded per task (reverse-engineer against a sample tree, verify-stack `--strict` on a sample diff, prd-creator minimal vs. comprehensive runs, architecture-sketch XS vs. M+API runs, resume-heo brownfield simulation)
+- Task 6 (this entry): appended F017–F020 to `feature_list.json` (marked `passes: true` — Tasks 1–5 dogfood + structure checks all passed), bumped README to "Skills (17)" with a `/reverse-engineer` row and updated `verify-stack`/`prd-creator`/`architecture-sketch` descriptions, fixed a pre-existing stray "d" typo on `prd-creator/SKILL.md` line 11, and refreshed `~/.claude/skills/` via `install.ps1 -Force` (17/17 skills, 4/4 rules, 3/3 tools installed — `reverse-engineer` confirmed present)
+- Confirmed absent: literal "AIDLC" does not appear in `README.md` or `feature_list.json`
+- Next: first real-project dogfood of the brownfield path (`/reverse-engineer` → `/resume-heo` State C) on an inherited codebase
