@@ -4,35 +4,25 @@ description: Use AFTER prd-creator and BEFORE init-project to propose a tech sta
 ---
 
 # architecture-sketch
-
 <!-- PRD가 있고 init-project 전에, 사용자가 기술 스택과 프로젝트 구조를 확인할 수 있게 하는 스킬. -->
 <!-- 비개발자를 위해 설계: 기술 결정을 사용자 관점의 영향(속도, 복잡도, 접근성)으로 설명. -->
 
 ## Overview
-
-Read the PRD, analyze what's being built, and propose an architecture the user can validate **before** init-project creates any files. Surfaces direction-level choices (where it runs, where data lives, how complex) while making engineering-level decisions (framework, build tool, lint config) silently.
-
-The user should feel like they're approving a blueprint, not choosing from a tech menu.
+Read the PRD, analyze what's being built, and propose an architecture the user can validate **before** init-project creates any files. Surfaces direction-level choices (where it runs, where data lives, how complex) while making engineering-level decisions (framework, build tool, lint config) silently. The user should feel like they're approving a blueprint, not choosing from a tech menu.
 
 ## ⚠️ Output Convention
-
 `ARCHITECTURE_PROPOSAL.md` convention:
 - English body. Korean comments only when they add non-obvious context (not heading translations).
 - Save to project root (alongside PRD.md)
 
 ## Preconditions
-
 Before starting, check:
-
 1. **PRD.md must exist.** If not → "PRD가 먼저 필요해요. `/prd-creator`부터 시작할까요?"
 2. **If ARCHITECTURE_PROPOSAL.md already exists** → "이미 아키텍처 제안서가 있어요. 새로 만들까요, 기존 걸 수정할까요?"
-
 Read silently: `PRD.md`, and `BRAINSTORM.md` if it exists.
 
 ## Cost Estimate
-
 <!-- 비용 추정: PRD 분석 + 대안 생성은 중간 규모 컨텍스트 -->
-
 Before starting, show:
 
 ```
@@ -42,7 +32,6 @@ Before starting, show:
 After skill completes, append to `.claude/cost-log.jsonl` per `~/.claude/rules/cost-awareness.md`.
 
 ## Step 1: Analyze PRD (silent)
-
 Extract from PRD.md:
 - **Product type**: What is being built? (web app, CLI tool, script, desktop app, API, automation, etc.)
 - **Feature inventory**: Count and complexity of features; any that imply specific tech (e.g., "실시간 알림" → WebSocket, "이메일" → email API)
@@ -53,10 +42,7 @@ Extract from PRD.md:
 Do NOT present this analysis to the user. Use it to inform the recommendation.
 
 ## Step 2: Present Recommended Architecture
-
-Lead with the recommendation and its strengths. Use user-facing language, not framework jargon.
-
-Template (adapt per project):
+Lead with the recommendation and its strengths. Use user-facing language, not framework jargon. Template (adapt per project):
 
 > "PRD를 분석했어요. 이 프로젝트에 맞는 구조를 제안합니다.
 >
@@ -86,14 +72,12 @@ Template (adapt per project):
 > [한 문장으로 이게 사용자에게 뭘 의미하는지 — 예: "기능 5개 이하의 간단한 프로젝트, 하루면 기본 구조 완성 가능"]"
 
 ## Step 3: Surface Direction-Level Choices
-
 After presenting the recommendation, identify if there are **direction-level** choices the user should weigh in on. These are choices where:
 - Either option is defensible
 - The trade-off affects something the user can feel (speed, complexity, access, cost)
 - The user's preference matters more than engineering best practice
 
 ### Types of direction-level choices (pick relevant ones, max 2):
-
 | Choice | When to surface | User-facing framing |
 |---|---|---|
 | **Where does it run?** | PRD doesn't specify platform clearly | "내 컴퓨터에서만 vs 브라우저에서 어디서든" |
@@ -102,7 +86,6 @@ After presenting the recommendation, identify if there are **direction-level** c
 | **Hosted or local?** | Web app that could be static or hosted | "내 컴퓨터에서 실행 vs 인터넷에 올려서 어디서든" |
 
 Present each as a conversation question (one at a time):
-
 > "한 가지 방향을 정하면 좋겠어요:
 >
 > 1. **[옵션 A]** — [강점]. [트레이드오프]
@@ -113,15 +96,11 @@ Present each as a conversation question (one at a time):
 Wait for user's answer before continuing.
 
 ### When to skip choices:
-
 If the PRD makes the direction obvious (e.g., "Python 스크립트", "Chrome 확장", "웹사이트"), there's nothing to ask. Just present the recommendation with:
-
 > "다른 방향 원하시면 말씀해주세요."
 
 ### Execution-detail decisions (decide silently):
-
 These are engineering choices the skill decides without asking. Briefly note them in the ARCHITECTURE_PROPOSAL.md under "Technical Decisions" but don't surface as questions:
-
 - Specific framework/library (React vs Vue vs Svelte)
 - Package manager (npm vs pnpm vs yarn)
 - Test framework
@@ -129,13 +108,19 @@ These are engineering choices the skill decides without asking. Briefly note the
 - Build tool
 - CSS approach (Tailwind vs CSS modules vs vanilla)
 - API layer (REST vs tRPC vs GraphQL)
-
 For each, pick the option that is: (a) most common (largest ecosystem), (b) simplest for the project size, (c) best supported by Claude Code.
 
+## Step 3.5: NFR Patterns (conditional, design-level only)
+<!-- 복잡도가 S보다 크거나 신뢰성/성능이 중요할 때만. 인프라·배포·클라우드는 절대 다루지 않음. -->
+Add only when complexity is **M or L**, or the PRD implies reliability/performance needs (concurrent users, external API calls, long-running work); skip for XS/S. Cover, in **provider-neutral design terms only**:
+- **Performance** — rough latency/throughput expectations the design should meet.
+- **Resilience** — explicit timeouts on external calls; circuit breaker / retry-with-backoff for flaky dependencies; graceful degradation when a non-critical dependency is down.
+- **Scalability** — statelessness where possible; avoid shared mutable bottlenecks.
+
+Write under a "## NFR Patterns" heading in `ARCHITECTURE_PROPOSAL.md`. Do NOT specify deployment topology, redundancy/failover setup, provisioning automation, scaling infrastructure, or cloud services — deployment is owned by HEO's `/deploy` and `/monitor`, and stays provider-agnostic here.
+
 ## Step 4: Save ARCHITECTURE_PROPOSAL.md
-
 After user confirms the recommendation (and any choices are resolved), save:
-
 ```markdown
 <!-- init-project가 이 문서를 소비하여 프로젝트를 스캐폴딩한다. -->
 
@@ -165,6 +150,12 @@ After user confirms the recommendation (and any choices are resolved), save:
 [ASCII diagram: input → processing → output/storage]
 ```
 
+## NFR Patterns
+<!-- complexity M/L 또는 신뢰성·성능 요구가 있을 때만. XS/S면 이 섹션 생략. -->
+- **Performance targets**: [latency/throughput expectation] [confidence tag]
+- **Resilience**: [timeouts / circuit breaker / graceful degradation as applicable]
+- **Scalability**: [stateless / bottleneck notes]
+
 ## Alternatives Considered
 
 ### [Alternative 1 name]
@@ -188,15 +179,11 @@ After user confirms the recommendation (and any choices are resolved), save:
 - [e.g., "웹앱으로 브라우저에서 접근" (over desktop app)]
 - [e.g., "로컬 SQLite" (over cloud DB)]
 ```
-
 Then confirm:
-
 > "ARCHITECTURE_PROPOSAL.md에 저장했어요. `/init-project`를 부르면 이 구조대로 프로젝트를 만들어요."
 
 ## Quality Check Before Saving
-
 All checks must pass:
-
 - [ ] **Recommended Stack** has concrete names (not "a web framework" but "Next.js 14")
 - [ ] **Project Structure** shows actual proposed folder/file names
 - [ ] **Data Flow** has an ASCII diagram (not just text description)
@@ -207,7 +194,6 @@ All checks must pass:
 - [ ] **Confidence tags** applied to stack reasoning, alternative rejections, and complexity per `~/.claude/rules/confidence-tags.md`
 
 ## Hard Rules
-
 - **NEVER scaffold files.** This skill proposes; init-project creates. No `mkdir`, no `npm init`, no file writes except ARCHITECTURE_PROPOSAL.md.
 - **NEVER ask the user to choose between specific frameworks/libraries.** "React vs Vue"는 engineering detail — skill이 결정. "웹 vs 데스크톱"은 direction — 사용자가 결정.
 - **NEVER present more than 2 direction-level choices.** If more exist, pick the 2 most impactful and decide the rest silently.
@@ -216,3 +202,5 @@ All checks must pass:
 - **ALWAYS lead with recommendation strengths**, then mention trade-offs. Not the reverse.
 - **ALWAYS include at least 2 alternatives** even if the recommendation is obvious — the user should see that options were considered.
 - **ALWAYS use user-facing language** in the conversation. Save technical details for the artifact's "Technical Decisions" table.
+- **NEVER include infrastructure or deployment specifics in NFR Patterns.** Design-level, provider-neutral only. No deployment topology, redundancy/failover setup, provisioning automation, or cloud services — `/deploy` owns deployment.
+- **ALWAYS skip NFR Patterns for XS/S projects.** Only surface for M/L or reliability-critical projects.
