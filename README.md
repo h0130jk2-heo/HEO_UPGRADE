@@ -138,7 +138,7 @@ HEO_UPGRADE/
 ├── ADVANCED_SKELETON.md           # Authoritative spec (4 phases, 16 features)
 ├── PRD.md                         # Product requirements
 ├── FRAMEWORK_DESIGN.md            # Initial design notes
-├── feature_list.json              # Feature tracking (16/16 passes:true)
+├── feature_list.json              # Feature tracking (20/20 passes:true)
 ├── progress.md                    # Cumulative session log
 ├── HANDOFF.md                     # Last session handoff state
 ├── install.ps1                    # Windows installer
@@ -180,7 +180,7 @@ HEO_UPGRADE/
 
 <!-- 현재 상태 -->
 
-- **Framework build**: Complete (16/16 features, 10 sessions)
+- **Framework build**: Complete (20/20 features, 11 sessions)
 - **Success criteria**: 3/7 verified now, 3 deferred to first real project, 1 minor (15 vs 14 skills)
 - **Next milestone**: First real project end-to-end using the full SHAPE → BUILD → SHIP flow
 
