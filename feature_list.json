@@ -420,6 +420,14 @@
       "passes": true,
       "description": "Conditional provider-neutral NFR patterns (performance/resilience/scalability); infra/deploy/DR/AWS excluded",
       "phase": "SHAPE"
+    },
+    {
+      "id": "F021",
+      "name": "design-sketch skill + design rule",
+      "priority": "Should",
+      "passes": true,
+      "description": "New SHAPE-phase design-sketch skill + visual reference layer. design-sketch reads PRD, judges platform (web/mobile) x purpose (landing/dashboard/document/app) axes, presents 2-3 directions AS picture mockups from a design model where the user chooses one of three routes (1: generate directly via connected Pencil MCP or Google Stitch via stitch-mcp/SDK; 2: receive a ready-to-paste prompt per direction to run in Stitch/Pencil and drop images into design-refs/; 3: Claude hand-codes an HTML mockup under an anti-generic guardrail - commit a section-3-checked direction first, no defaults, 2-3 distinct stances, light/dark tokens, saved to design-refs/*.html - the guardrail replaces the former blanket ban on hand-coding since the real risk is free-drawing the average, not HTML per se) with a load-bearing recommendation, outputs DESIGN_PROPOSAL.md (tokens) + keeps chosen screens in design-refs/ as visual anchor. Adds always-installed framework/rules/design.md (2026 frontend judgment baseline: AI-as-intern, universal core, judgment-to-pixels section, two-axis selection guide, anti-generic checklist) with platforms/ + profiles/ reference files. Wires architecture-sketch to hand off for UI projects; init-project consumes DESIGN_PROPOSAL.md, scaffolds design tokens (light+dark) and preserves design-refs/; feature-done adds Step 2-V visual verification loop (render -> screenshot -> compare vs design-refs/tokens -> regenerate on drift) closing the blind-designer gap",
+      "phase": "SHAPE"
     }
   ]
 }

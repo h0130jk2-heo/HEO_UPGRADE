@@ -7,8 +7,9 @@ description: >
   prd-creator completes. ALWAYS use this skill when the user wants to go from PRD to
   code — don't just start coding without running this first.
   Consumes ARCHITECTURE_PROPOSAL.md (from /architecture-sketch) for precise tech stack,
-  folder layout, and data flow. Installs language packs (.claude/rules/<lang>.md) based
-  on detected stack.
+  folder layout, and data flow, and DESIGN_PROPOSAL.md (from /design-sketch) for design
+  tokens (typography, color, spacing) which it scaffolds into a base stylesheet. Installs
+  language packs (.claude/rules/<lang>.md) based on detected stack.
 ---
 
 # init-project
@@ -54,6 +55,18 @@ ARCHITECTURE_PROPOSAL.md를 프로젝트 루트에서 읽는다.
   "ARCHITECTURE_PROPOSAL.md가 없어요. PRD 기반으로 진행합니다. 기술 스택 선택을 먼저 하려면 `/architecture-sketch`를 실행해주세요."
 
 **핵심 원칙:** ARCHITECTURE_PROPOSAL.md가 있으면, 거기에 기록된 기술 결정이 PRD의 암묵적 추론보다 우선한다.
+
+### 1c. DESIGN_PROPOSAL.md (선택, 화면 있는 프로젝트에 권장)
+
+DESIGN_PROPOSAL.md를 프로젝트 루트에서 읽는다.
+
+- **있으면**: Design Tokens(Typography, Color light/dark, Space/Radius/Motion), Chosen
+  Direction, Key Components, Accessibility Commitments를 추출해 Step 3.7(디자인 토큰 스캐폴딩)과
+  Step 2(CLAUDE.md)에서 사용한다.
+- **없으면**: 건너뛴다. 화면이 있는 프로젝트인데 없으면 한 번만 안내한다:
+  "DESIGN_PROPOSAL.md가 없어요. 디자인 방향 없이 진행하면 기본 스타일이 '평균적인 AI 룩'으로
+  흐를 수 있어요. 먼저 `/design-sketch`로 방향을 정하려면 지금 멈춰도 돼요. 그냥 진행할까요?"
+  사용자가 진행을 원하면 `~/.claude/rules/design.md`의 공통 코어만 기준으로 삼는다.
 
 ## Step 2: CLAUDE.md 생성 (프로젝트 루트)
 
@@ -225,6 +238,42 @@ whenever new files or folders are introduced.
 (From ARCHITECTURE_PROPOSAL.md Data Flow diagram, or recorded once two features form a pipeline.)
 ```
 
+## Step 3.7: 디자인 토큰 스캐폴딩 (DESIGN_PROPOSAL.md 있을 때만)
+<!-- 화면 있는 프로젝트에서, 확정된 디자인 방향을 실제 코드 기반으로 심는다. 없으면 이 단계 통째로 건너뜀. -->
+
+DESIGN_PROPOSAL.md가 있으면, 거기 기록된 토큰을 **스택의 스타일링 방식에 맞는 형태**로 실제 파일에 심는다.
+
+### 형태 선택 (Tech Stack의 Styling에 맞춤)
+| Styling 방식 | 산출 형태 |
+|---|---|
+| Tailwind | `tailwind.config`의 theme(색/폰트/spacing/radius) + `:root` CSS 변수(다크: `.dark`) |
+| CSS Modules / vanilla CSS | `src/styles/tokens.css` — `:root`(light) + `@media (prefers-color-scheme: dark)` 또는 `[data-theme="dark"]` |
+| styled-components / CSS-in-JS | `src/theme.ts` — light/dark theme 객체 |
+| 순수 HTML 산출물 (전역 CLAUDE.md의 HTML 목표) | 단일 `<style>`의 `:root` 토큰 블록 (외부 의존 없이 self-contained) |
+
+### 심을 내용
+1. **Color 토큰** — DESIGN_PROPOSAL의 semantic 토큰을 light/dark **양쪽** 정의(단순 반전 금지).
+   다크 본문 텍스트는 순백(#FFF) 대신 ~#FAFAFA.
+2. **Typography** — heading/body 폰트, scale, body 크기, line-height.
+3. **Space / Radius / Motion** — spacing 스케일, radius, 기본 duration/easing +
+   `@media (prefers-reduced-motion: reduce)` 축소 블록.
+4. 접근성 커밋(대비·키보드·색 단독 금지)을 코드 주석으로 남겨 이후 feature가 참조하게 한다.
+
+### 시각 앵커 보존 (design-refs/)
+<!-- 토큰은 일관성만 준다. 방향(취향)은 그림이 준다. design-refs/를 반드시 보존한다. -->
+
+DESIGN_PROPOSAL.md의 **Visual References**가 가리키는 `design-refs/` 폴더(고른 방향의 실제 화면
+mockup)는 **삭제하지 않고 프로젝트에 보존**한다. 이건 이후 각 기능 구현·검증(feature-done Step 2-V)이
+대조하는 시각 앵커다. CLAUDE.md의 Tech Stack/Codebase Structure 근처에 한 줄 포인터를 남긴다:
+`Design anchor: design tokens in [파일] + reference screens in design-refs/ (see DESIGN_PROPOSAL direction).`
+
+### 안내
+> "DESIGN_PROPOSAL의 디자인 토큰을 [산출 파일]에 심고, 방향 화면은 `design-refs/`에 보존했어요.
+> 이후 모든 기능은 이 토큰 + 화면을 기준으로 만들어지고 feature-done에서 스크린샷으로 대조돼요."
+
+DESIGN_PROPOSAL.md가 없으면 이 단계를 건너뛰고, 필요 시 `~/.claude/rules/design.md` 공통 코어를
+스타일 판단 기준으로만 참조한다(파일 강제 생성은 하지 않는다).
+
 ## Step 4: progress.md 생성
 
 ```markdown
@@ -332,21 +381,29 @@ dist/
 .claude/failures.log
 ```
 
-초기 커밋:
+초기 커밋 (Step 3.7에서 디자인 토큰 파일을 만들었으면 그 경로도 함께 add):
 ```bash
 git add CLAUDE.md feature_list.json progress.md docs/Architecture.md .gitignore .claude/rules/
+# 디자인 토큰 파일이 있으면: git add src/styles/tokens.css (또는 tailwind.config / src/theme.ts 등)
+# design-refs/가 있으면 함께 add (시각 앵커 — 보존): git add design-refs/
 git commit -m "init: project scaffold from PRD"
 ```
 
 ## Step 8: ARCHITECTURE_PROPOSAL.md 삭제 + 완료 안내
 
-### 8a. ARCHITECTURE_PROPOSAL.md 정리
+### 8a. 제안서 정리
 
 ARCHITECTURE_PROPOSAL.md를 소비했다면 삭제한다:
 ```bash
 rm ARCHITECTURE_PROPOSAL.md
 ```
 핵심 내용은 이미 `CLAUDE.md`(Tech Stack)와 `docs/Architecture.md`(Folder Layout, Data Flow)에 반영되었으므로 원본은 불필요.
+
+DESIGN_PROPOSAL.md를 소비했다면(Step 3.7) 삭제한다:
+```bash
+rm DESIGN_PROPOSAL.md
+```
+디자인 토큰은 이미 스타일 파일(예: `tokens.css` / `tailwind.config` / `theme.ts`)에 심겼으므로 원본은 불필요.
 
 ### 8b. 완료 안내
 
@@ -362,9 +419,12 @@ rm ARCHITECTURE_PROPOSAL.md
 - progress.md (진행 상황 추적)
 - .gitignore
 - .claude/rules/[lang].md (언어팩 — [설치된 언어 목록])
+- [디자인 토큰 파일 — DESIGN_PROPOSAL.md 있었을 때만, 예: src/styles/tokens.css]
+- [design-refs/ — 시각 앵커 화면, 보존됨 — 있었을 때만]
 
 소비된 파일:
 - ARCHITECTURE_PROPOSAL.md → CLAUDE.md + Architecture.md에 반영 후 삭제
+- [DESIGN_PROPOSAL.md → 토큰은 스타일 파일에, 시각 레퍼런스는 design-refs/에 남기고 원본 삭제 — 있었을 때만]
 
 기능 목록 요약:
 [Must] F001: ...

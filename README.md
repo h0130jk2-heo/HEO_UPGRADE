@@ -8,7 +8,30 @@ A skill framework for non-developers building software with [Claude Code](https:
 
 **[HTML Documentation](docs/index.html)** | **[GitHub Repository](https://github.com/h0130jk2-heo/HEO_UPGRADE)** | **[Changelog](CHANGELOG.md)**
 
+> **Version 2.1 (2026-07-08) — "Design Direction Update"**: 1 new skill (`/design-sketch`) + 1 new always-installed rule (`design.md`, a 2026 frontend-design judgment baseline) + 2 enhanced skills. HEO now commits a **visual direction** up front — platform (web/mobile) × purpose (landing/dashboard/document/app) — so builds stop drifting to generic AI defaults. See [What's New in v2.1](#whats-new-in-v21) below.
+>
 > **Version 2 (2026-07-06) — "Brownfield & Rigor Update"**: 1 new skill + 4 enhanced skills — brownfield codebase adoption, a deeper app-level security checklist, requirements depth with user stories, and provider-neutral NFR patterns. See [What's New in v2](#whats-new-in-v2) below or the full [CHANGELOG](CHANGELOG.md).
+
+## What's New in v2.1
+
+<!-- 디자인 방향 업데이트. 결과물이 "AI 평균값 룩"으로 흐르는 걸 앞단에서 방지. -->
+
+v2.1 closes HEO's biggest remaining gap: nothing in the pipeline decided **how the product
+should look**. Since HEO often builds visible artifacts (dashboards, reports, web/mobile UIs),
+a committed visual direction now sits in the SHAPE phase, grounded in a 2026 design-judgment
+reference that installs by default.
+
+| Skill / Rule | Type | What it adds |
+|---|---|---|
+| `/design-sketch` | **NEW skill** | SHAPE-phase visual-direction step. Reads the PRD, judges **platform (web/mobile) × purpose (landing/dashboard/document/app)**, and offers 2–3 directions **as picture mockups** via one of **three routes** the user picks: (1) generate directly via a connected Pencil/Google Stitch, (2) receive a ready-to-paste prompt to run in Stitch/Pencil themselves, or (3) let Claude hand-code an HTML mockup **under an anti-generic guardrail** (commit a §3-checked direction first, no defaults, 2–3 distinct stances, light/dark tokens). The guardrail — not a blanket ban on hand-coding — is what prevents free-drawing the average, and a clickable HTML anchor is often better for non-developers. The recommendation is **load-bearing** (opinionated default + easy override) — committing to a direction is what beats the average, not who picks it. Outputs `DESIGN_PROPOSAL.md` (tokens) + keeps the chosen screen in `design-refs/` as the visual anchor. Skips non-visual projects. |
+| `design.md` | **NEW rule** | Always-installed frontend-design judgment baseline (2026): the *AI-is-an-intern* meta-principle, a universal core (clarity, motion-as-structure, transparent/reversible, accessibility, tokens), a **judgment-to-pixels section** (prose loses to pictures; the blind-designer screenshot loop), a two-axis selection guide, and an anti-generic checklist. Backed by `platforms/` + `profiles/` reference files loaded on demand. |
+| `/architecture-sketch` | Enhanced | Hands off to `/design-sketch` for UI projects; explicitly leaves look-and-feel to it (tech/structure only). |
+| `/init-project` | Enhanced | Consumes `DESIGN_PROPOSAL.md`, scaffolds design tokens into a base stylesheet (Tailwind theme / `tokens.css` / `theme.ts` / self-contained `<style>`) in light **and** dark, and preserves `design-refs/` as the visual anchor. |
+| `/feature-done` | Enhanced | Adds a **visual verification loop** (Step 2-V) for UI features: render → screenshot → compare against `design-refs/` + tokens → regenerate on drift. Closes the "blind designer" gap so the committed direction survives to the built product. |
+
+**The gap, in one line:** the judgment layer (decide a direction up front) plus the **visual layer** (show it as pictures, and check the build back against them) — because tokens give consistency without conviction, and a model can't see what it renders.
+
+**Counts:** skills 17 → 18; features 20 → 21 (F021). Tracking: feature **F021**.
 
 ## What's New in v2
 
@@ -49,7 +72,8 @@ Claude Code can write code for you, but "code that works" and "code you can trus
   /brainstorm  (smart-skip)          /turbo-build (automated pipeline)
   /prd-creator                        ── or manual ──
   /architecture-sketch               /feature-plan
-  /init-project                      [implement] + checkpoint every 5 edits
+  /design-sketch (UI projects)       [implement] + checkpoint every 5 edits
+  /init-project
                                      /verify-stack (security/review/cross-model)
                                      /feature-done (QA + commit)  ↻ loop
 
@@ -65,16 +89,17 @@ Claude Code can write code for you, but "code that works" and "code you can trus
   Memory & Learning Loop │ Confidence Tagging │ Cost Awareness │ Bilingual Artifacts
 ```
 
-## Skills (17)
+## Skills (18)
 
-<!-- 17개 스킬 목록. Phase별 분류. -->
+<!-- 18개 스킬 목록. Phase별 분류. -->
 
 | Phase | Skill | What it does |
 |---|---|---|
 | SHAPE | `/brainstorm` | Divergent → convergent ideation when the idea is vague |
 | SHAPE | `/prd-creator` | Adaptive-depth MoSCoW PRD via 1:1 chat, with conditional User Stories + acceptance criteria for complex projects |
 | SHAPE | `/architecture-sketch` | Tech stack + folder layout proposal, with conditional provider-neutral NFR patterns (performance/resilience/scalability) |
-| SHAPE | `/init-project` | Scaffold files, CLAUDE.md, git init, language packs |
+| SHAPE | `/design-sketch` | Visual-direction proposal (platform × purpose axes) → design tokens in `DESIGN_PROPOSAL.md`; keeps builds off generic AI defaults |
+| SHAPE | `/init-project` | Scaffold files, CLAUDE.md, git init, language packs, design tokens |
 | SHAPE | `/reverse-engineer` | Analyze an existing codebase into HEO artifacts (brownfield entry) |
 | BUILD | `/turbo-build` | Automated pipeline: builds all features in fresh sessions (no context pollution) |
 | BUILD | `/feature-plan` | Live per-feature plan from current architecture state |
@@ -97,6 +122,7 @@ Claude Code can write code for you, but "code that works" and "code you can trus
 |---|---|---|
 | **Confidence Tagging** | `~/.claude/rules/confidence-tags.md` | `[verified]` / `[high]` / `[medium]` / `[guess]` on every actionable claim |
 | **Cost Awareness** | `~/.claude/rules/cost-awareness.md` | One-line cost estimate before expensive steps; append to `.claude/cost-log.jsonl` |
+| **Design Judgment** | `~/.claude/rules/design.md` | 2026 frontend-design baseline: AI-as-intern, universal core, platform × purpose selection, anti-generic checklist |
 | **Memory & Learning** | `instincts.md` + `lessons-learned.md` | Cross-project pattern accumulation with confidence grading |
 | **Bilingual Artifacts** | Convention | English body + `<!-- 한글 주석 -->` in all generated files |
 
@@ -110,6 +136,7 @@ Claude Code can write code for you, but "code that works" and "code you can trus
 /brainstorm          # if idea is vague
 /prd-creator         # if idea is clear
 /architecture-sketch # review tech stack before coding
+/design-sketch       # decide visual direction (UI projects) before coding
 /init-project        # scaffold and start building
 
 # 3. Build all features automatically:
@@ -193,15 +220,16 @@ HEO_UPGRADE/
 ├── install.sh                     # macOS/Linux installer
 ├── docs/index.html                # HTML documentation page
 ├── framework/                     # Portable framework bundle
-│   ├── skills/                    # 17 skill definitions
+│   ├── skills/                    # 18 skill definitions
 │   ├── tools/                     # Automation scripts (turbo-pipeline.ps1)
 │   └── rules/                     # 4 cross-cutting rules
 └── .gitignore
 
 ~/.claude/
-├── skills/                        # 17 skill definitions (SKILL.md each)
+├── skills/                        # 18 skill definitions (SKILL.md each)
 │   ├── brainstorm/
 │   ├── architecture-sketch/
+│   ├── design-sketch/             # platforms/ + profiles/ reference files
 │   ├── init-project/
 │   ├── prd-creator/
 │   ├── reverse-engineer/
@@ -220,6 +248,7 @@ HEO_UPGRADE/
 └── rules/                         # Global cross-cutting rules
     ├── confidence-tags.md
     ├── cost-awareness.md
+    ├── design.md                  # Frontend-design judgment baseline (2026)
     ├── instincts.md               # Positive patterns (7 entries)
     └── lessons-learned.md         # Failure patterns
 ```
@@ -228,7 +257,7 @@ HEO_UPGRADE/
 
 <!-- 현재 상태 -->
 
-- **Version**: v2 (2026-07-06) — Brownfield & Rigor Update
+- **Version**: v2.1 (2026-07-08) — Design Direction Update
 - **Framework build**: Complete (20/20 features, 11 sessions)
 - **Success criteria**: 3/7 verified now, 3 deferred to first real project, 1 minor (15 vs 14 skills)
 - **Next milestone**: First real project end-to-end using the full SHAPE → BUILD → SHIP flow

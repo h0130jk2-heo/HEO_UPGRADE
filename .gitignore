@@ -9,3 +9,6 @@ Thumbs.db
 .superpowers/
 docs/superpowers/
 output/
+
+# Skill dogfood/test sandboxes — local only, never published
+_dogfood/

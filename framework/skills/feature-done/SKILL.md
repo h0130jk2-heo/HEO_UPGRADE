@@ -69,7 +69,7 @@ If `test_spec.testable` is `false` or no `test_spec` exists → skip to Step 2.
 Verification methods:
 - File existence → use Read / Glob directly
 - Logic correctness → read code, trace execution path
-- UI / visual → open in browser if applicable
+- UI / visual → run the visual verification loop in Step 2-V (do not just eyeball it)
 
 Output results:
 ```
@@ -79,6 +79,18 @@ Manual QA:
 ```
 
 > **WARNING:** Setting `passes: true` without running tests (Step 1-C) AND manual QA (Step 2) is strictly forbidden.
+
+---
+
+### Step 2-V: Visual Verification Loop (UI features only)
+
+<!-- "앞 못 보는 디자이너": 모델은 자기 렌더를 못 보므로, 방향이 구현까지 살아남으려면 스크린샷 대조가 필요. -->
+
+If the feature produces/changes a **visible surface**, run the **render → screenshot → compare →
+regenerate on drift** loop (full method in `~/.claude/rules/design.md` §1a): compare the render
+against `design-refs/` (if `/design-sketch` ran) + tokens + design.md; with no screenshot tooling,
+do a structural check (tokens applied? four states?) rather than silently passing. Never pass a UI
+feature on the happy-path render alone. Skip for non-visual features.
 
 ---
 

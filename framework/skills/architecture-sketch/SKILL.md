@@ -179,8 +179,11 @@ After user confirms the recommendation (and any choices are resolved), save:
 - [e.g., "웹앱으로 브라우저에서 접근" (over desktop app)]
 - [e.g., "로컬 SQLite" (over cloud DB)]
 ```
-Then confirm:
-> "ARCHITECTURE_PROPOSAL.md에 저장했어요. `/init-project`를 부르면 이 구조대로 프로젝트를 만들어요."
+Then confirm, and route based on whether the project has a visible UI:
+- **Has a UI** (web/mobile/desktop app, dashboard, site, report): suggest the design step next.
+  > "ARCHITECTURE_PROPOSAL.md에 저장했어요. 이 프로젝트는 화면이 있으니, 코딩 전에 `/design-sketch`로 비주얼 방향(타이포·컬러·레이아웃)을 먼저 정하는 걸 추천해요. 그다음 `/init-project`를 부르면 구조 + 디자인 토큰까지 만들어요."
+- **No UI** (CLI, library, API, automation): skip design.
+  > "ARCHITECTURE_PROPOSAL.md에 저장했어요. `/init-project`를 부르면 이 구조대로 프로젝트를 만들어요."
 
 ## Quality Check Before Saving
 All checks must pass:
@@ -204,3 +207,4 @@ All checks must pass:
 - **ALWAYS use user-facing language** in the conversation. Save technical details for the artifact's "Technical Decisions" table.
 - **NEVER include infrastructure or deployment specifics in NFR Patterns.** Design-level, provider-neutral only. No deployment topology, redundancy/failover setup, provisioning automation, or cloud services — `/deploy` owns deployment.
 - **ALWAYS skip NFR Patterns for XS/S projects.** Only surface for M/L or reliability-critical projects.
+- **NEVER decide the visual design here.** Tech stack and structure only. Look-and-feel (typography, color, layout, components) is owned by `/design-sketch`. Styling approach (e.g. "Tailwind") is an engineering detail you may set; the visual direction that uses it is not.
