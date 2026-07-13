@@ -174,11 +174,11 @@ bash install.sh --force  # overwrite existing
 
 The scripts copy `framework/skills/` → `~/.claude/skills/` and `framework/rules/` → `~/.claude/rules/`. Existing files are skipped unless `-Force` / `--force` is used.
 
-### Updating an existing install (v1 → v2)
+### Updating an existing install (→ v2.1)
 
 <!-- 기존 설치자 업데이트 방법. -Force가 필요하지만 학습 데이터는 자동 보존됨. -->
 
-A plain install **skips files that already exist**, so it would add the new `/reverse-engineer` skill but leave your other skills on v1. To actually update the changed skills, pull the latest and re-install with `-Force` / `--force`:
+A plain install **skips files that already exist**, so it would add v2.1's new files (the `/design-sketch` skill and the always-installed `design.md` rule) but leave your **changed** skills (`/architecture-sketch`, `/init-project`, `/feature-done`) on the older version. To actually update the changed skills and rules, pull the latest and re-install with `-Force` / `--force`:
 
 **Windows (PowerShell):**
 ```powershell
@@ -195,7 +195,7 @@ bash install.sh --force
 Then **restart Claude Code** so it reloads the skills.
 
 **Your learning data is safe.** `-Force` / `--force` overwrites skill files and the static
-convention rules (`confidence-tags.md`, `cost-awareness.md`) with the new versions, but
+convention rules (`confidence-tags.md`, `cost-awareness.md`, `design.md`) with the new versions, but
 **`instincts.md` and `lessons-learned.md` are never overwritten** — the installer treats them as
 user data and only creates them if they don't yet exist. On update you'll see them marked
 `KEEP  (user data preserved)` in the output.
